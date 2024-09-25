@@ -1,0 +1,386 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Instant Support Buttons - Call, Contact, Chat, Email\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-21 05:55+0000\n"
+"PO-Revision-Date: 2024-02-21 05:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.6; wp-6.4.3\n"
+"X-Domain: fcb"
+
+#: includes/fcb-settings.php:154
+msgid " Disable Call Now Button"
+msgstr ""
+
+#: includes/fcb-settings.php:117 includes/fcb-settings.php:125
+#: includes/fcb-settings.php:133
+msgid "\"@\" symbol is not required."
+msgstr ""
+
+#: includes/fcb-settings.php:79 includes/fcb-settings.php:147
+msgid "(Ex: +91XXXXXXXXXX)"
+msgstr "(Beispiel: +91XXXXXXXXXX)"
+
+#: includes/fcb-settings.php:78 includes/fcb-settings.php:148
+msgid "+91XXXXXXXXXX"
+msgstr "+91XXXXXXXXXX"
+
+#: includes/fcb-settings.php:221
+msgid ""
+"Add Page/Post Id (where you want to display Quick Contact Buttons) with "
+"comma seperator (Ex. 2036,2251)."
+msgstr ""
+"Fügen Sie die Seiten-/Beitrags-ID (auf der Sie Schnellkontaktschaltflächen "
+"anzeigen möchten) mit einem Komma-Trennzeichen hinzu (z. B. 2036,2251)."
+
+#: includes/fcb-settings.php:238
+msgid "Background Color"
+msgstr "Hintergrundfarbe"
+
+#: includes/fcb-functions.php:41
+msgid "Call Now"
+msgstr "Jetzt anrufen"
+
+#: includes/fcb-functions.php:44 includes/fcb-settings.php:191
+#: includes/fcb-settings.php:199
+msgid "Callback Request"
+msgstr "Rückrufwunsch"
+
+#: includes/fcb-classes.php:360
+msgid "Choose File"
+msgstr "Datei wählen"
+
+#: includes/fcb-settings.php:155
+msgid ""
+"Choose the screen where you do not wish to showcase the \"Call Now\" button."
+msgstr ""
+"Wählen Sie den Bildschirm aus, auf dem die Schaltfläche „Jetzt anrufen“ "
+"nicht angezeigt werden soll."
+
+#: includes/fcb-settings.php:245
+msgid "Circle Color"
+msgstr "Kreisfarbe"
+
+#: includes/fcb-layout.php:215
+msgid "Click Here"
+msgstr "Klicken Sie hier"
+
+#. Author of the plugin
+msgid "Cool Plugins"
+msgstr "Coole Plugins"
+
+#: includes/fcb-settings.php:79 includes/fcb-settings.php:147
+msgid "Country Code"
+msgstr "Landesvorwahl"
+
+#: includes/fcb-settings.php:181
+msgid "Custom Link"
+msgstr "Benutzerdefinierten Link"
+
+#: includes/fcb-settings.php:173
+msgid "Custom Link Label"
+msgstr "Benutzerdefiniertes Link-Label"
+
+#: includes/fcb-settings.php:176
+msgid "Custom Link."
+msgstr "Benutzerdefinierten Link."
+
+#: includes/fcb-settings.php:219
+msgid "Custom Page/Post Id"
+msgstr "Benutzerdefinierte Seiten-/Beitrags-ID"
+
+#: includes/fcb-settings.php:165
+msgid "Email Address"
+msgstr "E-Mail-Adresse"
+
+#: includes/fcb-settings.php:197
+msgid "Email From (For Callback Request):"
+msgstr "E-Mail von (für Rückrufanfrage):"
+
+#: includes/fcb-settings.php:189
+msgid "Email Sent To (For Callback Request):"
+msgstr "E-Mail gesendet an (für Rückrufanfrage):"
+
+#: includes/fcb-functions.php:42 includes/fcb-settings.php:167
+msgid "Email Us"
+msgstr "Schreiben Sie uns eine E-Mail"
+
+#: includes/fcb-settings.php:220
+msgid "Enter page/post custom ID"
+msgstr "Geben Sie die benutzerdefinierte Seiten-/Beitrags-ID ein"
+
+#: includes/fcb-settings.php:174
+msgid "Enter Your Custom Link Name"
+msgstr "Geben Sie Ihren benutzerdefinierten Linknamen ein"
+
+#: includes/fcb-settings.php:86
+msgid "Enter Your Facebook Username"
+msgstr "Geben Sie Ihren Facebook-Benutzernamen ein"
+
+#: includes/fcb-settings.php:132
+msgid "Enter Your Instagram Username"
+msgstr "Geben Sie Ihren Instagram-Benutzernamen ein"
+
+#: includes/fcb-settings.php:140
+msgid "Enter Your Skype Username"
+msgstr "Geben Sie Ihren Skype-Benutzernamen ein"
+
+#: includes/fcb-settings.php:100
+msgid "Enter Your Slack Team ID"
+msgstr "Geben Sie Ihre Slack-Team-ID ein"
+
+#: includes/fcb-settings.php:108
+msgid "Enter Your Slack User ID"
+msgstr "Geben Sie Ihre Slack-Benutzer-ID ein"
+
+#: includes/fcb-settings.php:124
+msgid "Enter Your Telegram Username"
+msgstr "Geben Sie Ihren Telegram-Benutzernamen ein"
+
+#: includes/fcb-settings.php:93
+msgid "Enter Your Viber Address"
+msgstr "Geben Sie Ihre Viber-Adresse ein"
+
+#: includes/fcb-settings.php:116
+msgid "Enter Your X Username"
+msgstr "Geben Sie Ihren X-Benutzernamen ein"
+
+#: includes/fcb-functions.php:34
+msgid "Facebook"
+msgstr "Facebook"
+
+#: includes/fcb-settings.php:85
+msgid "Facebook Username"
+msgstr "Facebook-Benutzername"
+
+#. Description of the plugin
+msgid ""
+"Floating buttons for instant support or quick contact - callback, skype, "
+"slack, telegram."
+msgstr ""
+"Schwebende Schaltflächen für sofortigen Support oder schnellen Kontakt – "
+"Rückruf, Skype, Slack, Telegramm."
+
+#: includes/fcb-settings.php:231
+msgid "Font Color"
+msgstr "Schriftfarbe"
+
+#: includes/fcb-settings.php:53
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#. Author URI of the plugin
+msgid "https://coolplugins.net/"
+msgstr ""
+
+#: includes/fcb-feedback-notice.php:82
+msgid "I already rated it"
+msgstr "Ich habe es bereits bewertet"
+
+#: feedback/admin-feedback-form.php:107
+msgid ""
+"I consent to having Cool Plugins store my all submitted information via this "
+"form, they can also respond to my inquiry."
+msgstr ""
+"Ich bin damit einverstanden, dass Cool Plugins meine über dieses Formular "
+"übermittelten Informationen speichert und auf meine Anfrage antworten kann."
+
+#: feedback/admin-feedback-form.php:58 feedback/admin-feedback-form.php:132
+msgid "I found a better plugin"
+msgstr "Ich habe ein besseres Plugin gefunden"
+
+#: feedback/admin-feedback-form.php:93
+msgid ""
+"If you have a moment, please share why you are deactivating this plugin."
+msgstr ""
+"Wenn Sie einen Moment Zeit haben, teilen Sie uns bitte mit, warum Sie dieses "
+"Plugin deaktivieren."
+
+#: includes/fcb-functions.php:39
+msgid "Instagram"
+msgstr "Instagram"
+
+#: includes/fcb-settings.php:131
+msgid "Instagram Username"
+msgstr "Instagram-Benutzername"
+
+#. Name of the plugin
+msgid "Instant Support Buttons - Call, Contact, Chat, Email"
+msgstr "Schaltflächen für sofortigen Support – Anruf, Kontakt, Chat, E-Mail"
+
+#: feedback/admin-feedback-form.php:66 feedback/admin-feedback-form.php:140
+msgid "It's a temporary deactivation"
+msgstr "Es handelt sich um eine vorübergehende Deaktivierung"
+
+#: includes/fcb-feedback-notice.php:83
+msgid "No, not good enough, i do not like to rate it!"
+msgstr "Nein, nicht gut genug, ich bewerte es nicht gern!"
+
+#: includes/fcb-feedback-notice.php:84
+msgid "Not Interested"
+msgstr "Nicht interessiert"
+
+#: feedback/admin-feedback-form.php:70 feedback/admin-feedback-form.php:144
+msgid "Other"
+msgstr "Andere"
+
+#: includes/fcb-settings.php:146
+msgid "Phone Number (for call now button)"
+msgstr "Telefonnummer (für die Schaltfläche „Jetzt anrufen“)"
+
+#: includes/fcb-layout.php:215
+msgid "Please configure at least one social media option in setting's page"
+msgstr ""
+"Bitte konfigurieren Sie mindestens eine Social-Media-Option auf der "
+"Einstellungsseite"
+
+#: includes/fcb-layout.php:249
+msgid "Please enter valid phone number"
+msgstr "Bitte geben Sie eine gültige Telefonnummer ein"
+
+#: includes/fcb-layout.php:235
+msgid "Please enter your phone number and we will call you back soon"
+msgstr ""
+"Bitte geben Sie Ihre Telefonnummer ein und wir rufen Sie zeitnah zurück"
+
+#: feedback/admin-feedback-form.php:71 feedback/admin-feedback-form.php:145
+msgid "Please share the reason"
+msgstr "Bitte teilen Sie den Grund mit"
+
+#: feedback/admin-feedback-form.php:59 feedback/admin-feedback-form.php:133
+msgid "Please share which plugin"
+msgstr "Bitte teilen Sie welches Plugin mit"
+
+#: feedback/admin-feedback-form.php:80
+msgid "Quick Feedback"
+msgstr "Schnelles Feedback"
+
+#: includes/fcb-settings.php:79 includes/fcb-settings.php:147
+msgid "Required"
+msgstr "Erforderlich"
+
+#: includes/fcb-settings.php:101 includes/fcb-settings.php:109
+#: includes/fcb-settings.php:167 includes/fcb-settings.php:176
+#: includes/fcb-settings.php:191 includes/fcb-settings.php:199
+msgid "Required for"
+msgstr "Benötigt für"
+
+#: includes/fcb-settings.php:239
+msgid "Select Background color"
+msgstr "Wählen Sie Hintergrundfarbe"
+
+#: includes/fcb-settings.php:246
+msgid "Select Circle color"
+msgstr "Wählen Sie die Kreisfarbe aus"
+
+#: includes/fcb-settings.php:232
+msgid "Select Font color"
+msgstr "Wählen Sie Schriftfarbe"
+
+#: includes/fcb-settings.php:209
+msgid "Select where you want to display"
+msgstr "Wählen Sie aus, wo Sie anzeigen möchten"
+
+#: includes/fcb-settings.php:208
+msgid "Show on Pages/Posts"
+msgstr "Auf Seiten/Beiträgen anzeigen"
+
+#: includes/fcb-functions.php:40
+msgid "Skype"
+msgstr "Skype"
+
+#: includes/fcb-settings.php:139
+msgid "Skype Username"
+msgstr "Skype-Benutzername"
+
+#: includes/fcb-functions.php:36 includes/fcb-settings.php:101
+#: includes/fcb-settings.php:109
+msgid "Slack"
+msgstr "Locker"
+
+#: includes/fcb-settings.php:99
+msgid "Slack Team ID"
+msgstr "Slack-Team-ID"
+
+#: includes/fcb-settings.php:107
+msgid "Slack User ID"
+msgstr "Slack-Benutzer-ID"
+
+#: includes/fcb-layout.php:218
+msgid "Social media options not selected"
+msgstr "Social-Media-Optionen nicht ausgewählt"
+
+#: includes/fcb-settings.php:57
+msgid "Style Settings"
+msgstr "Stileinstellungen"
+
+#: includes/fcb-layout.php:240
+msgid "Submit"
+msgstr "Einreichen"
+
+#: includes/fcb-settings.php:101 includes/fcb-settings.php:109
+#: includes/fcb-settings.php:167 includes/fcb-settings.php:191
+msgid "Support Button"
+msgstr "Support-Taste"
+
+#: includes/fcb-settings.php:199
+msgid ""
+"Support Button should match the one provided in the SMTP plugin settings."
+msgstr ""
+"Der Support-Button sollte mit dem in den SMTP-Plugin-Einstellungen "
+"angegebenen übereinstimmen."
+
+#: includes/fcb-functions.php:38
+msgid "Telegram"
+msgstr "Telegramm"
+
+#: includes/fcb-settings.php:123
+msgid "Telegram Username"
+msgstr "Telegram-Benutzername"
+
+#: includes/fcb-layout.php:245
+msgid "Thank you"
+msgstr "Danke"
+
+#: feedback/admin-feedback-form.php:54 feedback/admin-feedback-form.php:128
+msgid "The plugin didn't work as expected"
+msgstr "Das Plugin funktionierte nicht wie erwartet"
+
+#: feedback/admin-feedback-form.php:62 feedback/admin-feedback-form.php:136
+msgid "The plugin is not working"
+msgstr "Das Plugin funktioniert nicht"
+
+#: includes/fcb-functions.php:35
+msgid "Viber"
+msgstr "Viber"
+
+#: includes/fcb-settings.php:92
+msgid "Viber Address"
+msgstr "Viber-Adresse"
+
+#: includes/fcb-layout.php:246
+msgid "We will call you back soon"
+msgstr "Wir rufen Sie bald zurück"
+
+#: includes/fcb-functions.php:33
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: includes/fcb-settings.php:77
+msgid "WhatsApp Number"
+msgstr "WhatsApp-Nummer"
+
+#: includes/fcb-functions.php:37
+msgid "X (Twitter)"
+msgstr "X (Twitter)"
+
+#: includes/fcb-settings.php:115
+msgid "X (Twitter) Username"
+msgstr "X (Twitter) Benutzername"

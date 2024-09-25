@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Instant Support Buttons Pro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-28 05:30+0000\n"
+"PO-Revision-Date: 2020-02-28 05:40+0000\n"
+"Last-Translator: admin <baljit.cooltimeline@gmail.com>\n"
+"Language-Team: Dutch\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.1; wp-5.3.2"
+
+#: includes/fcb-functions.php:22
+msgid "Call Now"
+msgstr "Bel nu"
+
+#: includes/fcb-functions.php:23
+msgid "Email Us"
+msgstr "Email ons"
+
+#: includes/fcb-functions.php:24
+msgid "Callback Request"
+msgstr "Terugbelverzoek"
+
+#: includes/fcb-layout.php:206
+msgid "Please configure at least one social media option in setting's page"
+msgstr "Configureer ten minste één sociaal optie media in pagina instelling te"
+
+#: includes/fcb-layout.php:206
+msgid "Click Here"
+msgstr "Klik hier"
+
+#: includes/fcb-layout.php:209
+msgid "Social media options not selected"
+msgstr "Social media-opties niet geselecteerd"
+
+#: includes/fcb-layout.php:223
+msgid "Please enter your phone number and we will call you back soon"
+msgstr "Voer uw telefoonnummer in en wij bellen u snel terug"
+
+#: includes/fcb-layout.php:228
+msgid "Submit"
+msgstr "voorleggen"
+
+#: includes/fcb-layout.php:234
+msgid "Thank you"
+msgstr "Dank je"
+
+#: includes/fcb-layout.php:235
+msgid "We will call you back soon"
+msgstr "We bellen u snel terug"
+
+#: includes/fcb-layout.php:238
+msgid "Please enter valid phone number"
+msgstr "Voer een geldig telefoonnummer in"
+
+#. Name of the plugin
+msgid "Instant Support Buttons - Call, Contact, Chat, Email"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Floating buttons for instant support or quick contact - callback, skype, "
+"slack, telegram."
+msgstr ""
+
+#. Author of the plugin
+msgid "Cool Plugins"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://coolplugins.net/"
+msgstr ""
