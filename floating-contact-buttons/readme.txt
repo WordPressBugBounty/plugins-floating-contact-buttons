@@ -2,8 +2,8 @@
 Contributors:narinder-singh,satindersingh,coolplugins
 Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,facebook messanger, Instagram
 Requires at least: 5.0
-Tested up to:6.4
-Stable tag: trunk
+Tested up to:6.8.1
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,10 @@ In the left menu panel go to Plugins >> Add New plugin</li>
 == Installation ==
 
 == Changelog ==
+<strong>Version 1.2.1 || 02 May 2025</strong>
+<pre>
+Tested:- Tested up to WordPress 6.8.1
+</pre>
 <strong>Version 1.2.0 || 22 FEB 2024</strong>
 <pre>
 Added: new buttons for Twitter, Instagram, and Custom Links.

@@ -5,7 +5,7 @@
  * Author: Cool Plugins
  * Author URI: https://coolplugins.net/
  * Plugin URI: 
- * Version: 1.2.0
+ * Version: 1.2.1
  * License: GPL2
  * Text Domain: fcb
  * Domain Path: languages
@@ -19,7 +19,7 @@ if (defined('FCB_VERSION')) {
     return;
 }
 
-define('FCB_VERSION', '1.2.0');
+define('FCB_VERSION', '1.2.1');
 define('FCB_FILE', __FILE__);
 define('FCB_PATH', plugin_dir_path(FCB_FILE));
 define('FCB_URL', plugin_dir_url(FCB_FILE));
