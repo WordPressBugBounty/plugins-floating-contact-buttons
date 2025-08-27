@@ -1,9 +1,10 @@
 === Floating Chat Buttons - Click to Call or Chat, Email ===
 Contributors:narinder-singh,satindersingh,coolplugins
 Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,facebook messanger, Instagram
-Requires at least: 5.0
-Tested up to:6.8.1
-Stable tag: 1.2.1
+Requires at least:5.0
+Requires PHP: 7.2
+Tested up to:6.8.2
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,94 +12,124 @@ Elevate user engagement through Floating Chat Buttons, facilitating immediate co
 
 == Description ==
 
-Are you seeking to <strong>Improve quick contact or customer support</strong> and elevate user experience on your website? Explore the option of integrating Floating Chat Buttons for instant support or Quick contact.
+**[Floating Chat Buttons](https://coolplugins.net/product/floating-support-buttons-call-contact-chat-email/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=view_plugin&utm_content=top_description)** is a simple WordPress plugin that helps your website visitors connect with you instantly. With just one click, users can reach you through **WhatsApp, Facebook Messenger, Instagram, Skype, Slack, Telegram, Viber, Twitter, Email, or a direct phone call**.
 
-With these buttons, visitors to your website can quickly and easily connect with you via a range of communication channels, including <strong>Chat, Email, callback, social contact, Skype, Slack, and Telegram</strong>.
+You can show the buttons on selected pages or across your entire site. It also includes a callback request option, so visitors can ask you to call them back.
 
-Please check the demo of the Instant Support or Floating Chat Buttons:-
+### Key Features
 
-<a href="https://demos.coolplugins.net/floating-chat-buttons/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=demo">Click Here to view demo</a>
+* **Multiple Contact Options:** Add buttons for popular apps and channels like **WhatsApp, Facebook Messenger, Instagram, Skype, Slack, Telegram, Viber, Twitter,** and **Email,** ensuring your visitors can contact you on their preferred platform instead of being limited to just one option.
 
-One of the standout benefits of <strong>Floating Chat Buttons</strong> is its sleek design options and user-friendly settings. This makes it easy for website owners to customize the buttons and ensure that they blend seamlessly with the existing content. Additionally, the compact design ensures that the buttons do not obstruct any important content on the website.
+* **Click to Call Button:** Add a **“Call Now”** button so users can instantly dial your phone number with a single click. 
 
-Another key feature of Floating Chat Buttons is its mobile responsiveness. The buttons are designed to adapt to the available screen size, making them accessible to visitors regardless of the device they are using. This ensures that website owners can connect with their visitors even when they are on the go.
+* **Callback Request:** Not available to take calls immediately? The plugin offers a callback request option where visitors can leave their details and ask you to call them back later. This improves customer trust and ensures you don’t miss potential leads.
 
-Floating Chat Buttons also offers a range of communication channels, including <strong>WhatsApp Messenger, Slack, Skype, Telegram, Viber, Instagram, Twitter, and Facebook</strong>. This versatility enables website owners to engage with visitors across multiple platforms and ensures that they are accessible to visitors regardless of their preferences.
+* **Customizable Design:** Adjust the style and colors of chat buttons according to your website design. 
 
-In addition, the <strong>Callback Request</strong> option is a simple and effective way for visitors to request a call back from the website owner. This ensures that visitors can get in touch with website owners even when they are not available.
+* **Responsive Layout:** The buttons are fully mobile-friendly. They automatically adjust size and position based on the device screen, desktop, tablet, or mobile.
 
-Finally, <strong>Floating Chat Buttons</strong> allows website owners to customize the display of the buttons to suit their website layout. Website owners can choose to display the buttons on specific pages or throughout the entire website. They can also add or remove social media icons at any time with a single click.
+* **RTL Language Support:** If your website uses a Right-to-Left language (like Arabic, Hebrew, or Urdu), the buttons display accordingly.
 
-Overall, In summary, Floating Chat Buttons stand out as a valuable asset for website owners seeking to elevate their customer support and enrich the overall user experience. Its user-friendly interface, coupled with customizable features, empowers website owners to streamline communication channels and provide prompt assistance to their visitors. 
+* **Custom Links:** Apart from the built-in apps, you can also add your own custom links. For example, link to a support portal, a custom chat system, or even another contact form.
 
+* **Easy Setup:** You don’t need to know any coding. Simply install the plugin, enable the buttons you want, and add your contact details in the settings. Everything can be managed from a clean and simple settings panel.
 
+### Check our other Cool Plugins
+* **[Cool FormKit For Elementor Forms](https://coolplugins.net/cool-formkit-for-elementor-forms/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=cfkef_check_out)**: Add advanced fields and features to your Elementor form widget, like conditional fields, range sliders, country code, and more.
+
+* **[Automatic Translate Addon for Loco Translate](https://locoaddon.com/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=atlt_check_out)**: It is a powerful addon that enhances the functionality of the Loco Translate plugin by enabling the automatic translation of WordPress themes and plugins. This addon connects with sources like Google, Yandex, DeepL, or AI-powered sources like ChatGPT, Gemini AI and Chrome AI to provide instant and automated translations.
+
+* **[AutoPoly - AI Translation For Polylang](https://coolplugins.net/product/automatic-translations-for-polylang/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=atfp_check_out)**: This addon duplicates your page or post titles, content, images, galleries, or meta fields, and automatically translates them into the selected language. Whether you’re using Elementor or Gutenberg, this addon makes the translation process easier.
+
+* **[Timeline Widget For Elementor](https://cooltimeline.com/plugin/elementor-timeline-widget-pro/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=twae_check_out)**: Showcase your company history, product roadmap, and personal journey in vertical & horizontal layout directly inside Elementor.
+ 
 == Installation ==
-Install via WordPress Admin (best plugin installation method)
-<ul>
-<li>Login to WordPress Admin
-In the left menu panel go to Plugins >> Add New plugin</li>
-<li>Just search "Floating Chat Buttons"</li>
-<li>Click on Install Now.</li>
-<li>After that just activate the plugin. Hover to Settings and go to Floating Chat Buttons. </li>
-<li> Note: Please fill information in the Settings panel according to your requirement. Please remember to specify the pages where you want the display in Style settings.
-</li>
-</ul>
+### Install via WordPress Admin (best plugin installation method)
+* Log in to WordPress Admin. From the left menu panel go to Plugins >> Add New plugin.
+* Just search "Floating Chat Buttons".
+* Click on Install Now.
+* After that, just activate the plugin. Hover to Settings and go to Floating Chat Buttons. 
+
+>***Note:** Please fill information in the Settings panel according to your requirement. Please remember to specify the pages where you want the display in Style settings.*
+
+== Frequently Asked Questions ==
+
+= How do I add a WhatsApp chat button to my WordPress site? =
+You can easily add a WhatsApp chat button using the Floating Chat Buttons plugin. Simply enter your WhatsApp number in the settings, and the button will appear on your website for instant chat.
+
+= Can I show the buttons only on specific pages? =
+Yes, you can choose whether to display the chat buttons across the entire website or only on selected pages.
+
+= What contact channels are supported? =
+The plugin supports WhatsApp, Facebook Messenger, Instagram, Skype, Slack, Telegram, Viber, Twitter, Email, and direct phone calls. You can also add your own custom links.
+
+= How do I add a callback request button in WordPress? =
+Floating Chat Buttons includes a callback feature. Visitors can request a call back, and you’ll be notified to return their call.
+
+= Can I customize the button design? =
+Yes, you can change the style, colors, and placement of the buttons to match your website’s look.
+
+= Does this plugin support right-to-left (RTL) languages? =
+Yes, it fully supports RTL languages like Arabic, Hebrew, and Urdu.
+
+= Can I add multiple chat buttons at the same time? =
+Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) together. Visitors can then choose their preferred contact method.
+
 == Screenshots ==
 1. Floating Chat Button General settings
 2. Floating Chat Button style settings
 3. Floating Chat Buttons frontend view
-== Installation ==
 
 == Changelog ==
-<strong>Version 1.2.1 || 02 May 2025</strong>
-<pre>
-Tested:- Tested up to WordPress 6.8.1
-</pre>
-<strong>Version 1.2.0 || 22 FEB 2024</strong>
-<pre>
-Added: new buttons for Twitter, Instagram, and Custom Links.
-Added: Implemented RTL (Right-to-Left) support for languages that require it.
-Improvements: Resolved callback issue related to call functionality.
-Improvements: Enhanced button descriptions for improved clarity and usability.
-</pre>
-<strong>Version 1.1.2 || 11 JAN 2024</strong>
-<pre>
-Tested:- Tested up to WP 6.4
-Updated: readme text.
-</pre>
-<strong>Version 1.1.1 || 04 April 2023</strong>
-<pre>
-Tested:- Tested up to WP 6.2
-Updated: readme text.
-</pre>
 
-<strong>Version 1.1 || 28 Feb 2020</strong>
-<pre>
-Added:- Call Now Button
-Added:- Not Interested Button in the plugin review box
-Fixed:- Wrong Translation
-Fixed:- Button Style for safari
-Fixed:- Deactivation feedback form bug
-Improvements:- Created separate files for functions
-</pre>
+= Version 1.2.2 | 27 August 2025 =
+- **Fixed:** Security issue.
+- **Added:** Internal link updated.
 
-<strong>Version 1.0.4</strong>
-<pre>
-Improvements:-sanitize all input fields
-Improvements:-Code Improvements
-</pre>
+= Version 1.2.1 || 02 May 2025 =
+- **Tested:** Tested up to WordPress 6.8.1
 
-<strong>Version 1.0.2</strong>
-<pre>
-Improvements:-Improved settings panel
-Improvements:-Improved Viber icon
-Integrated:- Deactivation Feedback Form
-Changed:- Changed plugin name
-</pre>
+= Version 1.2.0 || 22 FEB 2024 =
+- **Added:** New buttons for Twitter, Instagram, and Custom Links.
+- **Added:** Implemented RTL (Right-to-Left) support for languages that require it.
+- **Improvements:** Resolved callback issue related to call functionality.
+- **Improvements:** Enhanced button descriptions for improved clarity and usability.
 
-== Changelog ==
-<strong>Version 1.0.1</strong>
-<pre>
-Improvements:-Improved settings panel
-</pre>
+= Version 1.1.2 || 11 JAN 2024 =
+- **Tested:** Tested up to WP 6.4
+- **Updated:** readme text.
+
+= Version 1.1.1 || 04 April 2023 =
+- **Tested:** Tested up to WP 6.2
+- **Updated:** readme text.
+
+= Version 1.1 || 28 Feb 2020 =
+- **Added:** Call Now Button
+- **Added:** Not Interested Button in the plugin review box
+- **Fixed:** Wrong Translation
+- **Fixed:** Button Style for Safari
+- **Fixed:** Deactivation feedback form bug
+- **Improvements:** Created separate files for functions
+
+= Version 1.0.4 =
+- **Improvements:** Sanitize all input fields
+- **Improvements:** Code Improvements
+
+= Version 1.0.2 =
+- **Improvements:** Improved settings panel
+- **Improvements:** Improved Viber icon
+- **Integrated:** Deactivation Feedback Form
+- **Changed:** Changed plugin name
+
+= Version 1.0.1 =
+- **Improvements:** Improved settings panel
 --initial release--
+
+== Upgrade Notice ==
+= Version 1.1 || 28 Feb 2020 =
+- **Added:** Call Now Button
+- **Added:** Not Interested Button in the plugin review box
+- **Fixed:** Wrong Translation
+- **Fixed:** Button Style for Safari
+- **Fixed:** Deactivation feedback form bug
+- **Improvements:** Created separate files for functions

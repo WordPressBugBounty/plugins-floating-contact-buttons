@@ -36,7 +36,7 @@ class FCB_Settings
      */
     function fcb_admin_menu()
     {
-        add_options_page('Floating Chat Buttons', 'Floating Chat Buttons', 'delete_posts', 'instant_support_buttons', array($this, 'fcb_plugin_page'));
+        add_options_page('Floating Chat Buttons', 'Floating Chat Buttons', 'manage_options', 'instant_support_buttons', array($this, 'fcb_plugin_page'));
     }
 
 
@@ -147,7 +147,7 @@ class FCB_Settings
                     'desc' => __('Required','fcb').' <strong>'.__('Country Code','fcb').'</strong> '.__('(Ex: +91XXXXXXXXXX)','fcb'),
                     'placeholder' => __('+91XXXXXXXXXX', 'fcb'),
                     'type' => 'text',
-                    'sanitize_callback' => 'sanitize_text_field',
+                    'sanitize_callback' => array($this, 'fcb_sanitize_phone'),
                 ),
                 array(
                     'name' => 'fcb_hide_call_now',
@@ -166,7 +166,7 @@ class FCB_Settings
                     'placeholder' => get_option('admin_email'),
                     'desc' => __('Required for','fcb').' <strong>'.__('Email Us','fcb').'</strong> '.__('Support Button','fcb'),
                     'type' => 'text',
-                    'sanitize_callback' => 'sanitize_text_field'
+                    'sanitize_callback' => 'sanitize_email'
                 ),
                 array(
                     'name' => 'fcb_custom_link_name',
@@ -183,6 +183,7 @@ class FCB_Settings
                     'desc' => __('"https://" is not Required.'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field',
+
                 ),
                 array(
                     'name' => 'fcb_email_to',
@@ -190,7 +191,7 @@ class FCB_Settings
                     'placeholder' => get_option('admin_email'),
                     'desc' => __('Required for','fcb').' <strong>'.__('Callback Request','fcb').'</strong> '.__('Support Button','fcb'),
                     'type' => 'text',
-                    'sanitize_callback' => 'sanitize_text_field'
+                    'sanitize_callback' => 'sanitize_email'
                 ),
                 array(
                     'name' => 'fcb_email_from',
@@ -198,7 +199,7 @@ class FCB_Settings
                     'placeholder' => get_option('admin_email'),
                     'desc' => __('Required for','fcb').' <strong>'.__('Callback Request','fcb').'</strong> '.__('Support Button should match the one provided in the SMTP plugin settings.','fcb'),
                     'type' => 'text',
-                    'sanitize_callback' => 'sanitize_text_field'
+                    'sanitize_callback' => 'sanitize_email'
                 ),
             ),				
 
@@ -231,21 +232,24 @@ class FCB_Settings
                     'label' => __('Font Color', 'fcb'),
                     'desc' => __('Select Font color', 'fcb'),
                     'type' => 'color',
-                    'default' => '#12580f'
+                    'default' => '#12580f',
+                    'sanitize_callback' => 'sanitize_hex_color'
                 ),
                 array(
                     'name' => 'fcb_bg_color',
                     'label' => __('Background Color', 'fcb'),
                     'desc' => __('Select Background color', 'fcb'),
                     'type' => 'color',
-                    'default' => '#ffffff'
+                    'default' => '#ffffff',
+                    'sanitize_callback' => 'sanitize_hex_color'
                 ),
                 array(
                     'name' => 'fcb_circle_color',
                     'label' => __('Circle Color', 'fcb'),
                     'desc' => __('Select Circle color', 'fcb'),
                     'type' => 'color',
-                    'default' => '#12580f'
+                    'default' => '#12580f',
+                    'sanitize_callback' => 'sanitize_hex_color'
                 ),
 			),
             
@@ -305,5 +309,23 @@ class FCB_Settings
 	  }
 
 	  return $default;
+	}
+
+	/**
+	 * Sanitize phone number
+	 *
+	 * @param string $phone Phone number input
+	 * @return string Sanitized phone number
+	 */
+	function fcb_sanitize_phone($phone) {
+		// Remove all non-digit characters except plus sign
+		$phone = preg_replace('/[^+0-9]/', '', $phone);
+		
+		// Validate format: optional + followed by 7-15 digits
+		if (!preg_match('/^\+?[0-9]{7,15}$/', $phone)) {
+			return ''; // Return empty string for invalid phone numbers
+		}
+		
+		return $phone;
 	}
 }

@@ -16,7 +16,18 @@ class FCB_Layout
      */
 	function fcb_callback_send_email(){
 
-		if(!isset($_POST['private_key']) || !wp_verify_nonce($_POST['private_key'],'fcb_email_responce_nonce')){
+		// Check user capability for email sending (allow non-logged-in users for contact form)
+		if (is_user_logged_in() && !current_user_can('read')) {
+			wp_send_json_error(array('message'=>'Unauthorized access'));
+			exit;
+		}
+
+		if(!isset($_POST['private_key'])){
+			wp_send_json_error(array('message'=>'nonce verification failed'));
+			exit;
+		}
+		
+		if(!wp_verify_nonce($_POST['private_key'],'fcb_email_responce_nonce')){
 			wp_send_json_error(array('message'=>'nonce verification failed'));
 			exit;
 		}
@@ -25,7 +36,25 @@ class FCB_Layout
 		
         $fcb_email_to =  sanitize_email($FCB_Settings->fcb_get_option('fcb_email_to', 'fcb_basic_settings'));
         $fcb_email_from =  sanitize_email($FCB_Settings->fcb_get_option('fcb_email_from', 'fcb_basic_settings'));
-		$fcb_phn_num = filter_var($_POST['phone_num'], FILTER_SANITIZE_NUMBER_INT);
+		
+		// Validate email addresses
+		if (!is_email($fcb_email_to) || !is_email($fcb_email_from)) {
+			wp_send_json_error(array('message'=>'Invalid email configuration'));
+			exit;
+		}
+		
+		
+		$fcb_phn_num = preg_replace('/[^\d+]/', '', $_POST['phone_num']);
+
+		
+		if (!preg_match('/^\+?[0-9]{7,15}$/', $fcb_phn_num)) {
+			wp_send_json_error(array(
+				'message' => 'Invalid phone number format. Please enter 7-15 digits with optional + prefix.'
+			));
+			exit;
+		}
+
+		
 		$site_url= get_bloginfo();
 				
 		$message = '<html><body>';
@@ -33,12 +62,12 @@ class FCB_Layout
 		$message .= '<p><strong>Call</strong>: <a href="tel:'.'+'.esc_attr($fcb_phn_num).'">'.'+'.$fcb_phn_num.'</a></p>';
 		$message .= '</body></html>';
 
-		$subject = "[$site_url]Callback Request By Instant Support Buttons ";
+		$subject = "[" . sanitize_text_field($site_url) . "] Callback Request By Instant Support Buttons";
 		
 		$headers  = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From:<$fcb_email_from> \r\n";
-        $headers .= "Reply-To: '.$fcb_email_from.'\r\n";
+        $headers .= "From:<" . sanitize_email($fcb_email_from) . "> \r\n";
+        $headers .= "Reply-To: " . sanitize_email($fcb_email_from) . "\r\n";
 		
         $mail=wp_mail( $fcb_email_to, $subject, $message, $headers);
 		exit;
@@ -55,25 +84,31 @@ class FCB_Layout
 		$fcb_circle_color=  $FCB_Settings->fcb_get_option('fcb_circle_color', 'fcb_style_settings');
 		
 		$select_color='';
-		$font_color=(isset($fcb_font_color)&& $fcb_font_color!="") ?$fcb_font_color :"#12580f";
-		$bg_color=(isset($fcb_bg_color)&& $fcb_bg_color!="") ?$fcb_bg_color :"#ffffff";
-		$circle_color=(isset($fcb_circle_color)&& $fcb_circle_color!="") ?$fcb_circle_color :"#12580f";
+		// Validate and sanitize color values
+		$font_color = sanitize_hex_color((isset($fcb_font_color) && $fcb_font_color!="") ? $fcb_font_color : "#12580f");
+		$bg_color = sanitize_hex_color((isset($fcb_bg_color) && $fcb_bg_color!="") ? $fcb_bg_color : "#ffffff");
+		$circle_color = sanitize_hex_color((isset($fcb_circle_color) && $fcb_circle_color!="") ? $fcb_circle_color : "#12580f");
+		
+		// Fallback to defaults if sanitization fails
+		$font_color = $font_color ? $font_color : "#12580f";
+		$bg_color = $bg_color ? $bg_color : "#ffffff";
+		$circle_color = $circle_color ? $circle_color : "#12580f";
 
 		$select_color='.fcb-container{
-			background-color:'.esc_html($circle_color).'!important;color: '.esc_html($circle_color).'!important;
+			background-color:'.$circle_color.'!important;color: '.$circle_color.'!important;
 		}		
 		.fcb-menus-container,.fcb-menus-container a,.fcb-media-icon .fcb-icon, .fcb-callback,#fcb-success-msg h2  {
-			background:'.esc_html($bg_color).'!important;
-			color: '.esc_html($font_color).'!important;
+			background:'.$bg_color.'!important;
+			color: '.$font_color.'!important;
 		}
 		#fcb-callback-submit{
-			background-color:'.esc_html($font_color).'!important;
+			background-color:'.$font_color.'!important;
 		}
 		.fcb-loader-ring:after{
-			border-color: '.esc_html($font_color).' transparent '.esc_html($font_color).' transparent !important;
+			border-color: '.$font_color.' transparent '.$font_color.' transparent !important;
 		}
 		.fcb-marque-icons .fcb-icon {
-			color: '.esc_html($circle_color).'!important;
+			color: '.$circle_color.'!important;
 		}
 		';
 		//end colors 
@@ -125,11 +160,14 @@ class FCB_Layout
 								$media_url= isset( $media_link ) ? $media_link : '';
                                 if($media_url!=''){
                                     $total_media_url[]= $media_url;
-									$output.='<span class="fcb-icon icon-'.esc_attr($value).'" style="z-index: '. (99 - esc_attr($animation_count)) .';animation-delay:'. esc_attr($animation_count).'s"></span>';
+									$animation_count = absint($animation_count);
+									$output.='<span class="fcb-icon icon-'.esc_attr($value).'" style="z-index: '. (99 - $animation_count) .';animation-delay:'. $animation_count.'s"></span>';
 									$animation_count = $animation_count + 2;
 								}					                        
                                
 							}
+									 // Validate animation_count for CSS output
+									 $animation_count = absint($animation_count);
 									 $output.='<style>						 
 										@keyframes cf4FadeInOut {
 											0% {
@@ -199,7 +237,7 @@ class FCB_Layout
                     }
 					else if($media_url!=''){
 						$fcb_address=true;
-                        $output.='<a href="'.$url_array[$value].'" target="__blank" class="fcb-menus" id="'.esc_attr($key).'">
+                        $output.='<a href="'.esc_url($url_array[$value]).'" target="__blank" class="fcb-menus" id="'.esc_attr($key).'">
                             <span class="fcb-media-icon">';
                                 
                             $output.='<span class="fcb-icon icon-'.esc_attr($value).'"></span>';

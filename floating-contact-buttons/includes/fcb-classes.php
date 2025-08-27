@@ -97,7 +97,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 				if ( isset($section['desc']) && !empty($section['desc']) ) {
 					$section['desc'] = '<div class="inside">' . $section['desc'] . '</div>';
 					$callback = function() use ( $section ) {
-				echo str_replace( '"', '\"', $section['desc'] );
+				echo wp_kses_post($section['desc']);
 			};
 				} else if ( isset( $section['callback'] ) ) {
 					$callback = $section['callback'];
@@ -151,7 +151,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 		 */
 		public function get_field_description( $args ) {
 			if ( ! empty( $args['desc'] ) ) {
-				$desc = sprintf( '<p class="description">%s</p>', $args['desc'] );
+				$desc = sprintf( '<p class="description">%s</p>', wp_kses_post($args['desc']) );
 			} else {
 				$desc = '';
 			}
@@ -169,7 +169,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$value       = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$type        = isset( $args['type'] ) ? $args['type'] : 'text';
-			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
+			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
 
 			$html        = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder );
 			$html       .= $this->get_field_description( $args );
@@ -195,7 +195,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$value       = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$type        = isset( $args['type'] ) ? $args['type'] : 'number';
-			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
+			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
 			$min         = ( $args['min'] == '' ) ? '' : ' min="' . $args['min'] . '"';
 			$max         = ( $args['max'] == '' ) ? '' : ' max="' . $args['max'] . '"';
 			$step        = ( $args['step'] == '' ) ? '' : ' step="' . $args['step'] . '"';
@@ -219,7 +219,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$html  .= sprintf( '<label for="wpuf-%1$s[%2$s]">', $args['section'], $args['id'] );
 			$html  .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id'] );
 			$html  .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked( $value, 'on', false ) );
-			$html  .= sprintf( '%1$s</label>', $args['desc'] );
+			$html  .= sprintf( '%1$s</label>', wp_kses_post($args['desc']) );
 			$html  .= '</fieldset>';
 
 			echo $html;
@@ -300,7 +300,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$value       = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="'.$args['placeholder'].'"';
+			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="'.esc_attr($args['placeholder']).'"';
 
 			$html        = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]"%4$s>%5$s</textarea>', $size, $args['section'], $args['id'], $placeholder, $value );
 			$html        .= $this->get_field_description( $args );
@@ -392,7 +392,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
-			$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );
+			$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, esc_attr($args['std']) );
 			$html  .= $this->get_field_description( $args );
 
 			echo $html;
@@ -425,6 +425,16 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			if ( !$options ) {
 				return $options;
+			}
+
+			// Additional security checks
+			if ( !current_user_can('manage_options') ) {
+				wp_die(__('You do not have sufficient permissions to access this page.', 'fcb'));
+			}
+
+			// Verify this is coming from admin and is a proper POST request
+			if ( !is_admin() || !isset($_POST['action']) || $_POST['action'] !== 'update' ) {
+				wp_die(__('Invalid request.', 'fcb'));
 			}
 
 			foreach( $options as $option_slug => $option_value ) {

@@ -21,24 +21,23 @@ if (!class_exists('fcbFeedbackNotice')) {
          * @return void
          */
         public function fcb_load_script() {
-            wp_register_script( 'fcb-feedback-notice-script', FCB_URL. 'assets/js/fcb-admin-feedback-notice.js', array( 'jquery' ),null, true );
+            wp_register_script( 'fcb-feedback-notice-script', plugin_dir_url(__FILE__) . '../assets/js/fcb-admin-feedback-notice.js', array( 'jquery' ),null, true );
             wp_enqueue_script( 'fcb-feedback-notice-script' );
-            wp_register_style( 'fcb-feedback-notice-styles',FCB_URL.'assets/css/fcb-admin-feedback-notice.css' );
+            wp_register_style( 'fcb-feedback-notice-styles', plugin_dir_url(__FILE__) . '../assets/css/fcb-admin-feedback-notice.css' );
             wp_enqueue_style( 'fcb-feedback-notice-styles' );
         }
         // ajax callback for review notice
         public function fcb_dismiss_review_notice(){
-            if(!wp_verify_nonce($_POST['private'],'fcb_review_notice_private')){
-                wp_send_json_error(array('message'=>'nonce verfication failed'));
+            if(!isset($_POST['private']) || !wp_verify_nonce($_POST['private'],'fcb_review_notice_private')){
+                wp_send_json_error(array('message'=>'nonce verification failed'));
                 exit;
             }
             update_option( 'fcb-alreadyRated','yes' );
-            echo  json_encode( array("success"=>"true") );
-            exit;
+            wp_send_json_success();
         }
         // admin notice  
         public function fcb_admin_notice_for_reviews(){
-            if( !current_user_can( 'update_plugins' ) ){
+            if( !current_user_can( 'manage_options' ) ){
                 return;
             }
             // get installation dates and rated settings

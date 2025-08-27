@@ -10,8 +10,9 @@ class FCB_functions{
 	// checkDevice() : checks if user device is phone, tablet, or desktop
 	// RETURNS 0 for desktop, 1 for mobile, 2 for tablets
 		if(isset($_SERVER['HTTP_USER_AGENT'])){
-			if(is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"))){
-				return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "tablet")) ? 2 : 1 ;
+			$user_agent = sanitize_text_field($_SERVER['HTTP_USER_AGENT']);
+			if(is_numeric(strpos(strtolower($user_agent), "mobile"))){
+				return is_numeric(strpos(strtolower($user_agent), "tablet")) ? 2 : 1 ;
 			}else{
 				return 0;
 			}
