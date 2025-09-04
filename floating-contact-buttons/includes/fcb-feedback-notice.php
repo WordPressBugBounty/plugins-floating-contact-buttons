@@ -33,7 +33,8 @@ if (!class_exists('fcbFeedbackNotice')) {
                 exit;
             }
             update_option( 'fcb-alreadyRated','yes' );
-            wp_send_json_success();
+            echo  json_encode( array("success"=>"true") );
+            exit;
         }
         // admin notice  
         public function fcb_admin_notice_for_reviews(){

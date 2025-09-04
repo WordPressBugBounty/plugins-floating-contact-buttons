@@ -4,7 +4,7 @@ Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,face
 Requires at least:5.0
 Requires PHP: 7.2
 Tested up to:6.8.2
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,20 +82,24 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 
 == Changelog ==
 
-= Version 1.2.2 | 27 August 2025 =
+= Version 1.2.3 | 04 Sep 2025 =
+- **Fixed:** Issues with the Feedback Review notice display .
+
+
+= Version 1.2.2 | 27 Aug 2025 =
 - **Fixed:** Security issue.
 - **Added:** Internal link updated.
 
 = Version 1.2.1 || 02 May 2025 =
 - **Tested:** Tested up to WordPress 6.8.1
 
-= Version 1.2.0 || 22 FEB 2024 =
+= Version 1.2.0 || 22 Feb 2024 =
 - **Added:** New buttons for Twitter, Instagram, and Custom Links.
 - **Added:** Implemented RTL (Right-to-Left) support for languages that require it.
 - **Improvements:** Resolved callback issue related to call functionality.
 - **Improvements:** Enhanced button descriptions for improved clarity and usability.
 
-= Version 1.1.2 || 11 JAN 2024 =
+= Version 1.1.2 || 11 Jan 2024 =
 - **Tested:** Tested up to WP 6.4
 - **Updated:** readme text.
 
