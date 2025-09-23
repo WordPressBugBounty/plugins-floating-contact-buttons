@@ -149,17 +149,26 @@ class cp_feedback{
             $deativation_reason = array_key_exists( $reason, $deactivate_reasons ) ? $reason : 'other'; 
           			
             $sanitized_message = sanitize_text_field($_POST['message'])==''?'N/A':sanitize_text_field($_POST['message']);
-            $admin_email = sanitize_email(get_option('admin_email'));
-            $site_url = esc_url(site_url());
+            $admin_email       = sanitize_email(get_option('admin_email'));
+            $site_url          = esc_url(site_url());
+            $plugin_initial    = get_option('fcb-initial-save-version') ? get_option('fcb-initial-save-version'): 'N/A';
+            $install_date      = get_option('fcb-install-date') ? get_option('fcb-install-date'): 'N/A';
+            $unique_key        = '59';
+            $site_id            = $site_url . '-' . $install_date . '-' . $unique_key;
 			$response = wp_remote_post( $this->feedback_url , [
                 'timeout' => 30,
                 'body' => [
+                    'server_info' => serialize(\Floating_Contact_Buttons::fcb_get_user_info()['server_info']),
+                    'extra_details' => serialize(\Floating_Contact_Buttons::fcb_get_user_info()['extra_details']),
                     'plugin_version' => $this->plugin_version,
+                    'plugin_initial' => $plugin_initial,
                     'plugin_name' => $this->plugin_name,
 					'reason' => $deativation_reason,
 					'review' => $sanitized_message,
 					'email'	=>	$admin_email,
 					'domain' => $site_url,
+                    'site_id' => md5( $site_id),
+
                 ],
 			] );
 			

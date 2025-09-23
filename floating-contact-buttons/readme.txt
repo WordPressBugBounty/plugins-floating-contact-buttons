@@ -4,7 +4,7 @@ Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,face
 Requires at least:5.0
 Requires PHP: 7.2
 Tested up to:6.8.2
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,14 +82,17 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 
 == Changelog ==
 
-= Version 1.2.4 | 19 Sep 2025 =
+= Version 1.2.5 || 23 Sep 2025 =
+- **Improved** : Improved the deactivation popup..
+
+= Version 1.2.4 || 22 Sep 2025 =
 - **Improved** : Rating div styling.
 
-= Version 1.2.3 | 04 Sep 2025 =
-- **Fixed:** Issues with the Feedback Review notice display .
+= Version 1.2.3 || 04 Sep 2025 =
+- **Fixed:** Issues with the Feedback Review notice display.
 
 
-= Version 1.2.2 | 27 Aug 2025 =
+= Version 1.2.2 || 27 Aug 2025 =
 - **Fixed:** Security issue.
 - **Added:** Internal link updated.
 
