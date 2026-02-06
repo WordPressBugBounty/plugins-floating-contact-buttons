@@ -3,8 +3,8 @@ Contributors:narinder-singh,satindersingh,coolplugins
 Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,facebook messanger, Instagram
 Requires at least:5.0
 Requires PHP: 7.2
-Tested up to:6.8.2
-Stable tag: 1.2.5
+Tested up to:6.9
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,8 +82,12 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 
 == Changelog ==
 
+= Version 1.2.6 || 09 Dec 2025 =
+- **Improved** : Assets updated.
+- **Tested:** Tested up to WordPress 6.9
+
 = Version 1.2.5 || 23 Sep 2025 =
-- **Improved** : Improved the deactivation popup..
+- **Improved** : Improved the deactivation popup.
 
 = Version 1.2.4 || 22 Sep 2025 =
 - **Improved** : Rating div styling.
@@ -102,8 +106,8 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 = Version 1.2.0 || 22 Feb 2024 =
 - **Added:** New buttons for Twitter, Instagram, and Custom Links.
 - **Added:** Implemented RTL (Right-to-Left) support for languages that require it.
-- **Improvements:** Resolved callback issue related to call functionality.
-- **Improvements:** Enhanced button descriptions for improved clarity and usability.
+- **Improved:** Resolved callback issue related to call functionality.
+- **Improved:** Enhanced button descriptions for improved clarity and usability.
 
 = Version 1.1.2 || 11 Jan 2024 =
 - **Tested:** Tested up to WP 6.4
@@ -119,20 +123,20 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 - **Fixed:** Wrong Translation
 - **Fixed:** Button Style for Safari
 - **Fixed:** Deactivation feedback form bug
-- **Improvements:** Created separate files for functions
+- **Improved:** Created separate files for functions
 
 = Version 1.0.4 =
-- **Improvements:** Sanitize all input fields
-- **Improvements:** Code Improvements
+- **Improved:** Sanitize all input fields
+- **Improved:** Code Improvements
 
 = Version 1.0.2 =
-- **Improvements:** Improved settings panel
-- **Improvements:** Improved Viber icon
+- **Improved:** Improved settings panel
+- **Improved:** Improved Viber icon
 - **Integrated:** Deactivation Feedback Form
 - **Changed:** Changed plugin name
 
 = Version 1.0.1 =
-- **Improvements:** Improved settings panel
+- **Improved:** Improved settings panel
 --initial release--
 
 == Upgrade Notice ==
@@ -142,4 +146,4 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 - **Fixed:** Wrong Translation
 - **Fixed:** Button Style for Safari
 - **Fixed:** Deactivation feedback form bug
-- **Improvements:** Created separate files for functions
+- **Improved:** Created separate files for functions
