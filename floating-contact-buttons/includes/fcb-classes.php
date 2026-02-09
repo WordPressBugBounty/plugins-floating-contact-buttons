@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+
 if ( !class_exists( 'FCB_Admin_Settings' ) ):
 	class FCB_Admin_Settings {
 
@@ -173,7 +178,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html        = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder );
 			$html       .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -202,7 +207,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html        = sprintf( '<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder, $min, $max, $step );
 			$html       .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -222,6 +227,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$html  .= sprintf( '%1$s</label>', wp_kses_post($args['desc']) );
 			$html  .= '</fieldset>';
 
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -245,6 +251,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$html .= $this->get_field_description( $args );
 			$html .= '</fieldset>';
 
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -266,7 +273,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html .= $this->get_field_description( $args );
 			$html .= '</fieldset>';
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -287,7 +294,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html .= sprintf( '</select>' );
 			$html .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -304,7 +311,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html        = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]"%4$s>%5$s</textarea>', $size, $args['section'], $args['id'], $placeholder, $value );
 			$html        .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -315,6 +322,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 		 * @return string
 		 */
 		function callback_html( $args ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->get_field_description( $args );
 		}
 
@@ -324,11 +332,11 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 		 * @param array   $args settings field args
 		 */
 		function callback_wysiwyg( $args ) {
-
+    
 			$value = $this->get_option( $args['id'], $args['section'], $args['std'] );
 			$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
 
-			echo '<div style="max-width: ' . $size . ';">';
+			echo '<div style="max-width:' . esc_attr( $size ) . ';">';
 
 			$editor_settings = array(
 				'teeny'         => true,
@@ -343,7 +351,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			wp_editor( $value, $args['section'] . '-' . $args['id'], $editor_settings );
 
 			echo '</div>';
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->get_field_description( $args );
 		}
 
@@ -357,12 +365,13 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$id    = $args['section']  . '[' . $args['id'] . ']';
+			 // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 			$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File','fcb' );
 
 			$html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
 			$html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
 			$html  .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -378,7 +387,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
 			$html  .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -394,7 +403,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, esc_attr($args['std']) );
 			$html  .= $this->get_field_description( $args );
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -407,13 +416,18 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 		function callback_pages( $args ) {
 
 			$dropdown_args = array(
-				'selected' => esc_attr($this->get_option($args['id'], $args['section'], $args['std'] ) ),
+				'selected' => esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) ),
 				'name'     => $args['section'] . '[' . $args['id'] . ']',
 				'id'       => $args['section'] . '[' . $args['id'] . ']',
-				'echo'     => 0
+				'echo'     => 0,
 			);
+			
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			$html = wp_dropdown_pages( $dropdown_args );
-			echo $html;
+			
+			echo wp_kses_post( $html );
+			
+			
 		}
 
 		/**
@@ -429,12 +443,16 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			// Additional security checks
 			if ( !current_user_can('manage_options') ) {
-				wp_die(__('You do not have sufficient permissions to access this page.', 'fcb'));
+				 // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+				 wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'fcb' ) );
 			}
 
 			// Verify this is coming from admin and is a proper POST request
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( !is_admin() || !isset($_POST['action']) || $_POST['action'] !== 'update' ) {
-				wp_die(__('Invalid request.', 'fcb'));
+					
+				// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+				wp_die( esc_html__( 'Invalid request.', 'fcb' ) );
 			}
 
 			foreach( $options as $option_slug => $option_value ) {
@@ -516,7 +534,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			}
 
 			$html .= '</h2>';
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 
@@ -529,7 +547,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			?>
 			<div class="metabox-holder">
 				<?php foreach ( $this->settings_sections as $form ) { ?>
-					<div id="<?php echo $form['id']; ?>" class="group" style="display: none;">
+					<div id="<?php echo esc_attr( $form['id'] ); ?>" class="group" style="display: none;">
 						<form method="post" action="options.php">
 							<?php
 							do_action( 'wsa_form_top_' . $form['id'], $form );

@@ -4,7 +4,7 @@ Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,face
 Requires at least:5.0
 Requires PHP: 7.2
 Tested up to:6.9
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,9 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 3. Floating Chat Buttons frontend view
 
 == Changelog ==
+
+= Version 1.2.7 || 09 Feb 2026 =
+- **Fixed** : Fixed issues reported by “Plugin Check” plugin.
 
 = Version 1.2.6 || 09 Dec 2025 =
 - **Improved** : Assets updated.

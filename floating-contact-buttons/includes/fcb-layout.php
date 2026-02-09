@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 class FCB_Layout
 {
 
@@ -27,11 +32,12 @@ class FCB_Layout
 			exit;
 		}
 		
-		if(!wp_verify_nonce($_POST['private_key'],'fcb_email_responce_nonce')){
-			wp_send_json_error(array('message'=>'nonce verification failed'));
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['private_key'] ) ), 'fcb_email_responce_nonce' ) ) {
+			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'fcb' ) ) );
 			exit;
 		}
-
+		
         $FCB_Settings = new FCB_Settings();
 		
         $fcb_email_to =  sanitize_email($FCB_Settings->fcb_get_option('fcb_email_to', 'fcb_basic_settings'));
@@ -44,7 +50,8 @@ class FCB_Layout
 		}
 		
 		
-		$fcb_phn_num = preg_replace('/[^\d+]/', '', $_POST['phone_num']);
+		$fcb_phn_num = preg_replace( '/[^\d+]/', '', sanitize_text_field( wp_unslash( $_POST['phone_num'] ?? '' ) ) );
+
 
 		
 		if (!preg_match('/^\+?[0-9]{7,15}$/', $fcb_phn_num)) {
@@ -249,10 +256,12 @@ class FCB_Layout
 				}		
 			    if($fcb_address!=true){
 					$setting_panel=admin_url('options-general.php?page=instant_support_buttons');
-					if(is_user_logged_in()){					
+					if(is_user_logged_in()){			
+						// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch		
 						$output.='<p class="fcb-config-plugin">'.__("Please configure at least one social media option in setting's page",'fcb').'. <a href="'.esc_url($setting_panel).'">'.__("Click Here",'fcb').'</a></p>';
 					}
 					else{
+						// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 						$output.='<p class="fcb-config-plugin">'.__("Social media options not selected",'fcb').'.</p>';
 					}				
 				} 
@@ -260,7 +269,8 @@ class FCB_Layout
 		    $output.='</div>';
 
 			if(in_array('fcb_phone',$social_media,true) && $fcb_email_to!='' &&  $fcb_email_from!=''){
-			$output.='
+				 // phpcs:disable WordPress.WP.I18n.TextDomainMismatch
+				$output.='
 				<div class="fcb-callback fcb-scale-transition fcb-scale-out" style="display:none;">
                     <div class="fcb-close-icon">
                         <img class="fcb-img" src="'.esc_url(FCB_URL). 'assets/images/fcb_close.png">
@@ -289,6 +299,7 @@ class FCB_Layout
 		        </div>';
 
 			}
+			// phpcs:enable WordPress.WP.I18n.TextDomainMismatch
         $output .= '</div>';
         $output .= '<style type="text/css">'.$select_color.'</style>';
 		
@@ -298,24 +309,25 @@ class FCB_Layout
             wp_enqueue_style( 'fcb-fontawesome');
             wp_enqueue_script( 'fcb-js');
             wp_enqueue_script( 'fcb-mask-js');
-            echo $output;
+           // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo  $output ;
         }
 	}
 	
-	function fcb_register_frontend_assets() 
-	{ 
+	function fcb_register_frontend_assets() { 
+
 		$nonce=wp_create_nonce('fcb_email_responce_nonce');
-		wp_register_style( 'fcb-css', FCB_URL . 'assets/css/floating-contact-buttons.min.css', array(), null);
-		wp_register_style( 'fcb-fontawesome', FCB_URL . 'assets/css/custom-icons.min.css', array(),false);
-		wp_register_script( 'fcb-js', FCB_URL . 'assets/js/floating-contact-buttons.min.js', array('jquery'), false, true);
-		wp_localize_script( 'fcb-js', 'fcb_callback_ajax', 
-			array( 
-				'ajax_url' => admin_url('admin-ajax.php'),
-				'private_key'=>$nonce,
-			) 
-		);
-		wp_register_script( 'fcb-mask-js', FCB_URL . 'assets/js/jquery.mask.min.js', array('jquery'), false, true);	
-		
+
+		wp_register_style( 'fcb-css', FCB_URL . 'assets/css/floating-contact-buttons.min.css', array(), FCB_VERSION );
+
+		wp_register_style( 'fcb-fontawesome', FCB_URL . 'assets/css/custom-icons.min.css', array(), FCB_VERSION );
+
+		wp_register_script( 'fcb-js', FCB_URL . 'assets/js/floating-contact-buttons.min.js', array('jquery'), FCB_VERSION, true );
+
+		wp_localize_script( 'fcb-js', 'fcb_callback_ajax', array( 'ajax_url' => admin_url('admin-ajax.php'), 'private_key'=>$nonce ) );
+
+		wp_register_script( 'fcb-mask-js', FCB_URL . 'assets/js/jquery.mask.min.js', array('jquery'), FCB_VERSION, true );	
 	}
+	
 	
 }

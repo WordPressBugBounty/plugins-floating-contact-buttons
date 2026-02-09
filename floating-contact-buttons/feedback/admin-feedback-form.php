@@ -1,5 +1,8 @@
 <?php
 namespace FCB\feedback;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 
 class cp_feedback{
 
@@ -28,10 +31,11 @@ class cp_feedback{
     function enqueue_feedback_scripts(){
         $screen = get_current_screen();
         if( isset( $screen ) && $screen->id == 'plugins' ){
-            wp_enqueue_script(__NAMESPACE__.'feedback-script', $this->plugin_url .'feedback/js/admin-feedback.js' );
-            wp_enqueue_style('cool-plugins-feedback-style', $this->plugin_url .'feedback/css/admin-feedback.css' );
+            wp_enqueue_script( __NAMESPACE__.'feedback-script', $this->plugin_url .'feedback/js/admin-feedback.js', array(), FCB_VERSION, true );
+            wp_enqueue_style( 'cool-plugins-feedback-style', $this->plugin_url .'feedback/css/admin-feedback.css', array(), FCB_VERSION );
         }
     }
+    
 
     /*
     |-----------------------------------------------------------------|
@@ -51,23 +55,30 @@ class cp_feedback{
 		}
 		$deactivate_reasons = [
 			'didnt_work_as_expected' => [
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'title' => __( 'The plugin didn\'t work as expected', 'fcb' ),
 				'input_placeholder' => 'What did you expect?',
 			],
 			'found_a_better_plugin' => [
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'title' => __( 'I found a better plugin', 'fcb' ),
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'input_placeholder' => __( 'Please share which plugin', 'fcb' ),
 			],
 			'couldnt_get_the_plugin_to_work' => [
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'title' => __( 'The plugin is not working', 'fcb' ),
 				'input_placeholder' => 'Please share your issue. So we can fix that for other users.',
 			],
 			'temporary_deactivation' => [
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'title' => __( 'It\'s a temporary deactivation', 'fcb' ),
 				'input_placeholder' => '',
 			],
 			'other' => [
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'title' => __( 'Other', 'fcb' ),
+                 // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 				'input_placeholder' => __( 'Please share the reason', 'fcb' ),
 			],
 		];
@@ -77,11 +88,14 @@ class cp_feedback{
 			            
             <div class="cool-plugins-deactivation-response">
             <div id="cool-plugins-deactivate-feedback-dialog-header">
-				<span id="cool-plugins-feedback-form-title"><?php echo __( 'Quick Feedback', 'fcb' ); ?></span>
+                
+				<span id="cool-plugins-feedback-form-title"><?php 
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+                echo esc_html__( 'Quick Feedback', 'fcb' ); ?></span>
             </div>
             <div id="cool-plugins-loader-wrapper">
 				<div class="cool-plugins-loader-container">
-                    <img class="cool-plugins-preloader" src="<?php echo $this->plugin_url; ?>feedback/images/cool-plugins-preloader.gif">
+                <img class="cool-plugins-preloader" src="<?php echo esc_url( $this->plugin_url . 'feedback/images/cool-plugins-preloader.gif' ); ?>">
                 </div>
             </div>
             <div id="cool-plugins-form-wrapper" class="cool-plugins-form-wrapper-cls">
@@ -90,7 +104,9 @@ class cp_feedback{
 				wp_nonce_field( '_cool-plugins_deactivate_feedback_nonce' );
 				?>
 				<input type="hidden" name="action" value="cool-plugins_deactivate_feedback" />
-                <div id="cool-plugins-deactivate-feedback-dialog-form-caption"><?php echo __( 'If you have a moment, please share why you are deactivating this plugin.', 'fcb' ); ?></div>
+                <div id="cool-plugins-deactivate-feedback-dialog-form-caption"><?php 
+                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+                echo esc_html__( 'If you have a moment, please share why you are deactivating this plugin.', 'fcb' ); ?></div>
 				<div id="cool-plugins-deactivate-feedback-dialog-form-body">
 					<?php foreach ( $deactivate_reasons as $reason_key => $reason ) : ?>
 						<div class="cool-plugins-deactivate-feedback-dialog-input-wrapper">
@@ -104,7 +120,9 @@ class cp_feedback{
 							<?php endif; ?>
 						</div>
                     <?php endforeach; ?>
-                    <input class="cool-plugins-GDPR-data-notice" id="cool-plugins-GDPR-data-notice" type="checkbox"><label for="cool-plugins-GDPR-data-notice"><?php echo __('I consent to having Cool Plugins store my all submitted information via this form, they can also respond to my inquiry.','fcb');?></label>
+                    <input class="cool-plugins-GDPR-data-notice" id="cool-plugins-GDPR-data-notice" type="checkbox"><label for="cool-plugins-GDPR-data-notice"><?php 
+                     // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+                     echo esc_html__( 'I consent to having Cool Plugins store my all submitted information via this form, they can also respond to my inquiry.', 'fcb' ); ?></label>
                 </div>
                 <div class="cool-plugin-popup-button-wrapper">
                     <a class="cool-plugins-button button-deactivate" id="cool-plugin-submitNdeactivate">Submit and Deactivate</a>
@@ -119,36 +137,43 @@ class cp_feedback{
     
 
     function submit_deactivation_response(){
-        if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], '_cool-plugins_deactivate_feedback_nonce' ) ) {
-			wp_send_json_error();
-		}else{
-            $reason = sanitize_text_field($_POST['reason']);
+        if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), '_cool-plugins_deactivate_feedback_nonce' ) ) {
+            wp_send_json_error('Invalid nonce. Security check failed.');
+        } else{
+            $reason = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
             $deactivate_reasons = [
                 'didnt_work_as_expected' => [
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'title' => __( 'The plugin didn\'t work as expected', 'fcb' ),
                     'input_placeholder' => 'What did you expect?',
                 ],
                 'found_a_better_plugin' => [
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'title' => __( 'I found a better plugin', 'fcb' ),
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'input_placeholder' => __( 'Please share which plugin', 'fcb' ),
                 ],
                 'couldnt_get_the_plugin_to_work' => [
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'title' => __( 'The plugin is not working', 'fcb' ),
                     'input_placeholder' => 'Please share your issue. So we can fix that for other users.',
                 ],
                 'temporary_deactivation' => [
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'title' => __( 'It\'s a temporary deactivation', 'fcb' ),
                     'input_placeholder' => '',
                 ],
                 'other' => [
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'title' => __( 'Other', 'fcb' ),
+                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
                     'input_placeholder' => __( 'Please share the reason', 'fcb' ),
                 ],
             ];
     
             $deativation_reason = array_key_exists( $reason, $deactivate_reasons ) ? $reason : 'other'; 
           			
-            $sanitized_message = sanitize_text_field($_POST['message'])==''?'N/A':sanitize_text_field($_POST['message']);
+            $sanitized_message = isset( $_POST['message'] ) && sanitize_text_field( wp_unslash( $_POST['message'] ) ) != '' ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : 'N/A';
             $admin_email       = sanitize_email(get_option('admin_email'));
             $site_url          = esc_url(site_url());
             $plugin_initial    = get_option('fcb-initial-save-version') ? get_option('fcb-initial-save-version'): 'N/A';

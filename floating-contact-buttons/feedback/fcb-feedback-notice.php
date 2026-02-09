@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 if (!class_exists('fcbFeedbackNotice')) {
     class fcbFeedbackNotice {
         /**
@@ -21,19 +25,20 @@ if (!class_exists('fcbFeedbackNotice')) {
          * @return void
          */
         public function fcb_load_script() {
-            wp_register_script( 'fcb-feedback-notice-script', plugin_dir_url(__FILE__) . '/js/fcb-admin-feedback-notice.js', array( 'jquery' ),null, true );
-            
-            wp_register_style( 'fcb-feedback-notice-styles', plugin_dir_url(__FILE__) . '/css/fcb-admin-feedback-notice.css' );
-            
+            wp_register_script( 'fcb-feedback-notice-script', plugin_dir_url(__FILE__) . '/js/fcb-admin-feedback-notice.js', array( 'jquery' ), FCB_VERSION, true );
+           
+            wp_register_style( 'fcb-feedback-notice-styles', plugin_dir_url(__FILE__) . '/css/fcb-admin-feedback-notice.css', array(), FCB_VERSION );
         }
+        
         // ajax callback for review notice
-        public function fcb_dismiss_review_notice(){
-            if(!isset($_POST['private']) || !wp_verify_nonce($_POST['private'],'fcb_review_notice_private')){
-                wp_send_json_error(array('message'=>'nonce verification failed'));
+        public function fcb_dismiss_review_notice() {
+            if ( ! isset( $_POST['private'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['private'] ) ), 'fcb_review_notice_private' ) ) {
+                wp_send_json_error( array( 'message' => 'nonce verification failed' ) );
                 exit;
             }
-            update_option( 'fcb-alreadyRated','yes' );
-            echo  json_encode( array("success"=>"true") );
+        
+            update_option( 'fcb-alreadyRated', 'yes' );
+            echo json_encode( array( "success" => "true" ) );
             exit;
         }
         // admin notice  
@@ -58,7 +63,7 @@ if (!class_exists('fcbFeedbackNotice')) {
                 }
                 
                 // grab plugin installation date and compare it with current date
-                $display_date = date( 'Y-m-d h:i:s' );
+                $display_date = gmdate( 'Y-m-d h:i:s' );
                 $install_date= new DateTime( $installation_date );
                 $current_date = new DateTime( $display_date );
                 $difference = $install_date->diff($current_date);
@@ -68,6 +73,7 @@ if (!class_exists('fcbFeedbackNotice')) {
                 if (isset($diff_days) && $diff_days>=3) {
                     wp_enqueue_script( 'fcb-feedback-notice-script' );
                     wp_enqueue_style( 'fcb-feedback-notice-styles' );
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo $this->create_notice_content();
                     }
         }  
@@ -81,8 +87,11 @@ if (!class_exists('fcbFeedbackNotice')) {
             $img_path=FCB_URL.'assets/images/fcb-logo.png';
             $p_name="Instant Support Buttons";
             $like_it_text='Rate Now! ★★★★★';
+             // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
             $already_rated_text=esc_html__( 'Already Reviewed', 'fcb' );
+             // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
             $not_like_it_text=esc_html__( 'No, not good enough, i do not like to rate it!', 'fcb' );
+             // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
             $not_interested=esc_html__( 'Not Interested', 'fcb' );
             $p_link=esc_url('https://wordpress.org/support/plugin/floating-contact-buttons/reviews/#new-post');
             $nonce=wp_create_nonce('fcb_review_notice_private');

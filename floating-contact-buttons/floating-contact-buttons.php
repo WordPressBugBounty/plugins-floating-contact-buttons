@@ -5,10 +5,9 @@
  * Author: Cool Plugins
  * Author URI: https://coolplugins.net/?utm_source=fcb_plugin&utm_medium=inside&utm_campaign=author_page&utm_content=plugins_list
  * Plugin URI: 
- * Version: 1.2.6
+ * Version: 1.2.7
  * License: GPL2
  * Text Domain: fcb
- * Domain Path: languages
  */
 
 if (!defined('ABSPATH')) {
@@ -19,7 +18,7 @@ if (defined('FCB_VERSION')) {
     return;
 }
 
-define('FCB_VERSION', '1.2.6');
+define('FCB_VERSION', '1.2.7');
 define('FCB_FILE', __FILE__);
 define('FCB_PATH', plugin_dir_path(FCB_FILE));
 define('FCB_URL', plugin_dir_url(FCB_FILE));
@@ -101,7 +100,7 @@ final class Floating_Contact_Buttons
      */
     public function fcb_init()
     {
-        load_plugin_textdomain('fcb', false, basename(dirname(__FILE__)) . '/languages/');
+        
 
          if (!get_option( 'fcb-initial-save-version' ) ) {
                 add_option( 'fcb-initial-save-version', FCB_VERSION );
@@ -119,7 +118,7 @@ final class Floating_Contact_Buttons
     public static function fcb_activate() {
         update_option("fcb-v",FCB_VERSION);
         update_option("fcb-type","FREE");
-        update_option("fcb-installDate",date('Y-m-d h:i:s') );
+        update_option("fcb-installDate",gmdate('Y-m-d h:i:s') );
         update_option("fcb-alreadyRated","no");
     }
 
@@ -141,7 +140,8 @@ final class Floating_Contact_Buttons
          global $wpdb;
         // Server and WP environment details
         $server_info = [
-            'server_software'        => isset($_SERVER['SERVER_SOFTWARE']) ? sanitize_text_field($_SERVER['SERVER_SOFTWARE']) : 'N/A',
+            'server_software'        => isset($_SERVER['SERVER_SOFTWARE']) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : 'N/A',
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             'mysql_version'          => $wpdb ? sanitize_text_field($wpdb->get_var("SELECT VERSION()")) : 'N/A',
             'php_version'            => sanitize_text_field(phpversion() ?: 'N/A'),
             'wp_version'             => sanitize_text_field(get_bloginfo('version') ?: 'N/A'),
