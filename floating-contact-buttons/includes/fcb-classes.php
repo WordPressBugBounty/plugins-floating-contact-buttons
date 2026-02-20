@@ -365,9 +365,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$id    = $args['section']  . '[' . $args['id'] . ']';
-			 // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File','fcb' );
-
+			$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File','floating-contact-buttons' );
 			$html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
 			$html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
 			$html  .= $this->get_field_description( $args );
@@ -443,16 +441,14 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			// Additional security checks
 			if ( !current_user_can('manage_options') ) {
-				 // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-				 wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'fcb' ) );
+				 wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'floating-contact-buttons' ) );
 			}
 
 			// Verify this is coming from admin and is a proper POST request
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( !is_admin() || !isset($_POST['action']) || $_POST['action'] !== 'update' ) {
 					
-				// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-				wp_die( esc_html__( 'Invalid request.', 'fcb' ) );
+				wp_die( esc_html__( 'Invalid request.', 'floating-contact-buttons' ) );
 			}
 
 			foreach( $options as $option_slug => $option_value ) {

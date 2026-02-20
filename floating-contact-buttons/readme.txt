@@ -1,10 +1,10 @@
 === Floating Chat Buttons - Click to Call or Chat, Email ===
 Contributors:narinder-singh,satindersingh,coolplugins
-Tags: chat, click to call, Whatsapp, Whatsapp chat, email, call now buttons,facebook messanger, Instagram
+Tags: chat, click to call, Whatsapp, email, Instagram
 Requires at least:5.0
 Requires PHP: 7.2
 Tested up to:6.9
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,8 @@ You can show the buttons on selected pages or across your entire site. It also i
 
 * **[Timeline Widget For Elementor](https://cooltimeline.com/plugin/elementor-timeline-widget-pro/?utm_source=fcb_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=twae_check_out)**: Showcase your company history, product roadmap, and personal journey in vertical & horizontal layout directly inside Elementor.
  
+**Use of 3rd Party Services:** This plugin connects to the Cool Plugins feedback server only for optional usage data sharing and voluntary feedback submission (for example, during plugin deactivation). Data is transmitted solely after explicit user consent. No hidden tracking is performed, and no frontend visitor or site user data is collected.  For more details, please review our [Data Usage Policy](https://my.coolplugins.net/terms/usage-tracking/), [TOS](https://my.coolplugins.net/terms/), and [Privacy Policy](https://my.coolplugins.net/terms/privacy-policy/).
+
 == Installation ==
 ### Install via WordPress Admin (best plugin installation method)
 * Log in to WordPress Admin. From the left menu panel go to Plugins >> Add New plugin.
@@ -81,6 +83,9 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 3. Floating Chat Buttons frontend view
 
 == Changelog ==
+
+= Version 1.2.8 || 20 Feb 2026 =
+- **Fixed** : Standardized text domain across plugin.
 
 = Version 1.2.7 || 09 Feb 2026 =
 - **Fixed** : Fixed issues reported by “Plugin Check” plugin.
@@ -143,10 +148,6 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 --initial release--
 
 == Upgrade Notice ==
-= Version 1.1 || 28 Feb 2020 =
-- **Added:** Call Now Button
-- **Added:** Not Interested Button in the plugin review box
-- **Fixed:** Wrong Translation
-- **Fixed:** Button Style for Safari
-- **Fixed:** Deactivation feedback form bug
-- **Improved:** Created separate files for functions
+
+= Version 1.2.8 || 20 Feb 2026 =
+- **Fixed** : Standardized text domain across plugin.

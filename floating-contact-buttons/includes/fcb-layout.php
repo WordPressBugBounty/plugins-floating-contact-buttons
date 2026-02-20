@@ -33,8 +33,7 @@ class FCB_Layout
 		}
 		
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['private_key'] ) ), 'fcb_email_responce_nonce' ) ) {
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'fcb' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'floating-contact-buttons' ) ) );
 			exit;
 		}
 		
@@ -256,13 +255,11 @@ class FCB_Layout
 				}		
 			    if($fcb_address!=true){
 					$setting_panel=admin_url('options-general.php?page=instant_support_buttons');
-					if(is_user_logged_in()){			
-						// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch		
-						$output.='<p class="fcb-config-plugin">'.__("Please configure at least one social media option in setting's page",'fcb').'. <a href="'.esc_url($setting_panel).'">'.__("Click Here",'fcb').'</a></p>';
+					if(is_user_logged_in()){								
+						$output.='<p class="fcb-config-plugin">'.__("Please configure at least one social media option in setting's page",'floating-contact-buttons').'. <a href="'.esc_url($setting_panel).'">'.__("Click Here",'floating-contact-buttons').'</a></p>';
 					}
 					else{
-						// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-						$output.='<p class="fcb-config-plugin">'.__("Social media options not selected",'fcb').'.</p>';
+						$output.='<p class="fcb-config-plugin">'.__("Social media options not selected",'floating-contact-buttons').'.</p>';
 					}				
 				} 
 				
@@ -280,21 +277,21 @@ class FCB_Layout
 							<div class="fcb-loader-ring"></div>
 						</div>
 						<div class="fcb-callback-text">
-							<span class="fcb-callback-message">'.__('Please enter your phone number and we will call you back soon','fcb').'</span>
+							<span class="fcb-callback-message">'.__('Please enter your phone number and we will call you back soon','floating-contact-buttons').'</span>
 						</div>						
 						<div class="fcb-callback-form">
 							<form method="post">
 							<input name="phone_num" id="fcb-phn-num" class="fcb-message-callback" required="required" type="tel" data-mask="00-000-00-000-00" placeholder="+XX-XXX-XX-XXX-XX">
-							<input id="fcb-callback-submit" type="submit" value="'.__('Submit','fcb').'">
+							<input id="fcb-callback-submit" type="submit" value="'.__('Submit','floating-contact-buttons').'">
 							</form>
 						</div>						
 					</div>				
 					<div id="fcb-success-msg">
-						<h2>'.__('Thank you','fcb').'</h2>
-						<p>'.__('We will call you back soon','fcb').'</p>
+						<h2>'.__('Thank you','floating-contact-buttons').'</h2>
+						<p>'.__('We will call you back soon','floating-contact-buttons').'</p>
 					</div>	
 					<div id="fcb-error-msg">
-						<span class="fcb-alert">'.__('Please enter valid phone number','fcb').'</span>
+						<span class="fcb-alert">'.__('Please enter valid phone number','floating-contact-buttons').'</span>
 					</div>	
 		        </div>';
 

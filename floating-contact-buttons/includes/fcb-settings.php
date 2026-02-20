@@ -54,13 +54,11 @@ class FCB_Settings
         $sections = array(
             array(
                 'id' => 'fcb_basic_settings',
-                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                'title' => __('General Settings', 'fcb')
+                'title' => __('General Settings', 'floating-contact-buttons')
             ),
             array(
                 'id' => 'fcb_style_settings',
-                // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                'title' => __('Style Settings', 'fcb')
+                'title' => __('Style Settings', 'floating-contact-buttons')
             ),
            
         );
@@ -80,113 +78,85 @@ class FCB_Settings
             'fcb_basic_settings' => array(
                 array(
                     'name' => 'fcb_whatsapp',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('WhatsApp Number', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('+91XXXXXXXXXX', 'fcb'),
-                    'desc' => __('Required','fcb') .' <strong>'.__('Country Code','fcb').'</strong> '.__('(Ex: +91XXXXXXXXXX)','fcb'),     // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch                                   
+                    'label' => __('WhatsApp Number', 'floating-contact-buttons'),
+                    'placeholder' => __('+91XXXXXXXXXX', 'floating-contact-buttons'),
+                    'desc' => __('Required','floating-contact-buttons') .' <strong>'.__('Country Code','floating-contact-buttons').'</strong> '.__('(Ex: +91XXXXXXXXXX)','floating-contact-buttons'),                                
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field',
                 ),
 				array(
                     'name' => 'fcb_facebook',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Facebook Username', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Facebook Username','fcb'),
+                    'label' => __('Facebook Username', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Facebook Username','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
 				 array(
                     'name' => 'fcb_viber',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Viber Address', 'fcb'),
-                     // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Viber Address','fcb'),
+                    'label' => __('Viber Address', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Viber Address','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
 				array(
                     'name' => 'fcb_slack',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Slack Team ID', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Slack Team ID', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required for','fcb').' <strong>'.__('Slack','fcb').'</strong> '.__('Support Button','fcb'),
+                    'label' => __('Slack Team ID', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Slack Team ID', 'floating-contact-buttons'),
+                    'desc' => __('Required for','floating-contact-buttons').' <strong>'.__('Slack','floating-contact-buttons').'</strong> '.__('Support Button','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
 				array(
                     'name' => 'fcb_slack_user',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Slack User ID', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Slack User ID', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required for','fcb').' <strong>'.__('Slack','fcb').'</strong> '.__('Support Button','fcb'),
+                    'label' => __('Slack User ID', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Slack User ID', 'floating-contact-buttons'),
+                    'desc' => __('Required for','floating-contact-buttons').' <strong>'.__('Slack','floating-contact-buttons').'</strong> '.__('Support Button','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
                 array(
                     'name' => 'fcb_twitter',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('X (Twitter) Username', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your X Username', 'fcb'),
-                     // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('"@" symbol is not required.','fcb'),
+                    'label' => __('X (Twitter) Username', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your X Username', 'floating-contact-buttons'),
+                    'desc' => __('"@" symbol is not required.','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
 				array(
                     'name' => 'fcb_telegram',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Telegram Username', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Telegram Username', 'fcb'),
-                     // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('"@" symbol is not required.','fcb'),
+                    'label' => __('Telegram Username', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Telegram Username', 'floating-contact-buttons'),
+                    'desc' => __('"@" symbol is not required.','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
                 array(
                     'name' => 'fcb_instagram',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Instagram Username', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Instagram Username', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('"@" symbol is not required.','fcb'),
+                    'label' => __('Instagram Username', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Instagram Username', 'floating-contact-buttons'),
+                    'desc' => __('"@" symbol is not required.','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
 				array(
                     'name' => 'fcb_skype',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Skype Username', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Skype Username', 'fcb'),
+                    'label' => __('Skype Username', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Skype Username', 'floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
                 array(
                     'name' => 'fcb_call',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Phone Number (for call now button)', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required','fcb').' <strong>'.__('Country Code','fcb').'</strong> '.__('(Ex: +91XXXXXXXXXX)','fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('+91XXXXXXXXXX', 'fcb'),
+                    'label' => __('Phone Number (for call now button)', 'floating-contact-buttons'),
+                    'desc' => __('Required','floating-contact-buttons').' <strong>'.__('Country Code','floating-contact-buttons').'</strong> '.__('(Ex: +91XXXXXXXXXX)','floating-contact-buttons'),
+                    'placeholder' => __('+91XXXXXXXXXX', 'floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => array($this, 'fcb_sanitize_phone'),
                 ),
                 array(
                     'name' => 'fcb_hide_call_now',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __(' Disable Call Now Button','fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Choose the screen where you do not wish to showcase the "Call Now" button.', 'fcb'),
+                    'label' => __(' Disable Call Now Button','floating-contact-buttons'),
+                    'desc' => __('Choose the screen where you do not wish to showcase the "Call Now" button.', 'floating-contact-buttons'),
                     'type' => 'multicheck',
                     'options' => array(
                         'pc' => 'PC',
@@ -196,53 +166,42 @@ class FCB_Settings
                 ),
 				array(
                     'name' => 'fcb_email',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Email Address', 'fcb'),
+                    'label' => __('Email Address', 'floating-contact-buttons'),
                     'placeholder' => get_option('admin_email'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required for','fcb').' <strong>'.__('Email Us','fcb').'</strong> '.__('Support Button','fcb'),
+                    'desc' => __('Required for','floating-contact-buttons').' <strong>'.__('Email Us','floating-contact-buttons').'</strong> '.__('Support Button','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_email'
                 ),
                 array(
                     'name' => 'fcb_custom_link_name',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Custom Link Label', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter Your Custom Link Name', 'fcb'),
+                    'label' => __('Custom Link Label', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter Your Custom Link Name', 'floating-contact-buttons'),
                     'type' => 'text',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required for','fcb').' <strong>'.__('Custom Link.','fcb').'</strong>',
+                    'desc' => __('Required for','floating-contact-buttons').' <strong>'.__('Custom Link.','floating-contact-buttons').'</strong>',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
                 array(
                     'name' => 'fcb_link',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Custom Link', 'fcb'),
+                    'label' => __('Custom Link', 'floating-contact-buttons'),
                     'placeholder' => 'Please Enter Your URL',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('"https://" is not Required.', 'fcb'),
+                    'desc' => __('"https://" is not Required.', 'floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field',
 
                 ),
                 array(
                     'name' => 'fcb_email_to',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Email Sent To (For Callback Request):', 'fcb'),
+                    'label' => __('Email Sent To (For Callback Request):', 'floating-contact-buttons'),
                     'placeholder' => get_option('admin_email'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required for','fcb').' <strong>'.__('Callback Request','fcb').'</strong> '.__('Support Button','fcb'),
+                    'desc' => __('Required for','floating-contact-buttons').' <strong>'.__('Callback Request','floating-contact-buttons').'</strong> '.__('Support Button','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_email'
                 ),
                 array(
                     'name' => 'fcb_email_from',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Email From (For Callback Request):', 'fcb'),
+                    'label' => __('Email From (For Callback Request):', 'floating-contact-buttons'),
                     'placeholder' => get_option('admin_email'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Required for','fcb').' <strong>'.__('Callback Request','fcb').'</strong> '.__('Support Button should match the one provided in the SMTP plugin settings.','fcb'),
+                    'desc' => __('Required for','floating-contact-buttons').' <strong>'.__('Callback Request','floating-contact-buttons').'</strong> '.__('Support Button should match the one provided in the SMTP plugin settings.','floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_email'
                 ),
@@ -251,10 +210,8 @@ class FCB_Settings
             'fcb_style_settings' => array(
                 array(
                     'name' => 'fcb_show_on',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Show on Pages/Posts', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Select where you want to display', 'fcb'),
+                    'label' => __('Show on Pages/Posts', 'floating-contact-buttons'),
+                    'desc' => __('Select where you want to display', 'floating-contact-buttons'),
                     'type' => 'radio',
                     'default' => 'all',
                     'options' => array(
@@ -264,12 +221,9 @@ class FCB_Settings
                 ),
                 array(
                     'name' => 'fcb_custom_page',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Custom Page/Post Id', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'placeholder' => __('Enter page/post custom ID','fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Add Page/Post Id (where you want to display floating chat buttons) with comma seperator (Ex. 2036,2251).', 'fcb'),
+                    'label' => __('Custom Page/Post Id', 'floating-contact-buttons'),
+                    'placeholder' => __('Enter page/post custom ID','floating-contact-buttons'),
+                    'desc' => __('Add Page/Post Id (where you want to display floating chat buttons) with comma seperator (Ex. 2036,2251).', 'floating-contact-buttons'),
                     'type' => 'text',
                     'sanitize_callback' => 'sanitize_text_field',
                     'dependency' => array(
@@ -279,30 +233,24 @@ class FCB_Settings
                 ),
                 array(
                     'name' => 'fcb_font_color',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Font Color', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Select Font color', 'fcb'),
+                    'label' => __('Font Color', 'floating-contact-buttons'),
+                    'desc' => __('Select Font color', 'floating-contact-buttons'),
                     'type' => 'color',
                     'default' => '#12580f',
                     'sanitize_callback' => 'sanitize_hex_color'
                 ),
                 array(
                     'name' => 'fcb_bg_color',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Background Color', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Select Background color', 'fcb'),
+                    'label' => __('Background Color', 'floating-contact-buttons'),
+                    'desc' => __('Select Background color', 'floating-contact-buttons'),
                     'type' => 'color',
                     'default' => '#ffffff',
                     'sanitize_callback' => 'sanitize_hex_color'
                 ),
                 array(
                     'name' => 'fcb_circle_color',
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'label' => __('Circle Color', 'fcb'),
-                    // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-                    'desc' => __('Select Circle color', 'fcb'),
+                    'label' => __('Circle Color', 'floating-contact-buttons'),
+                    'desc' => __('Select Circle color', 'floating-contact-buttons'),
                     'type' => 'color',
                     'default' => '#12580f',
                     'sanitize_callback' => 'sanitize_hex_color'

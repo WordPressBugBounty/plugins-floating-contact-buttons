@@ -87,12 +87,9 @@ if (!class_exists('fcbFeedbackNotice')) {
             $img_path=FCB_URL.'assets/images/fcb-logo.png';
             $p_name="Instant Support Buttons";
             $like_it_text='Rate Now! ★★★★★';
-             // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-            $already_rated_text=esc_html__( 'Already Reviewed', 'fcb' );
-             // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-            $not_like_it_text=esc_html__( 'No, not good enough, i do not like to rate it!', 'fcb' );
-             // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-            $not_interested=esc_html__( 'Not Interested', 'fcb' );
+            $already_rated_text=esc_html__( 'Already Reviewed', 'floating-contact-buttons' );
+            $not_like_it_text=esc_html__( 'No, not good enough, i do not like to rate it!', 'floating-contact-buttons' );
+            $not_interested=esc_html__( 'Not Interested', 'floating-contact-buttons' );
             $p_link=esc_url('https://wordpress.org/support/plugin/floating-contact-buttons/reviews/#new-post');
             $nonce=wp_create_nonce('fcb_review_notice_private');
         

@@ -36,30 +36,18 @@ class FCB_functions{
 	function fcb_social_media(){
 		$custom_link_name = $this->get_custom_link_name(); 
 		$select_social_media= array(
-			 // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_whatsapp'		=> __('WhatsApp','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_facebook'		=> __('Facebook','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_viber'			=> __('Viber','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_slack'			=> __('Slack','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_twitter'		=> __('X (Twitter)','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_telegram'		=> __('Telegram','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_instagram'		=> __('Instagram','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_skype'			=> __('Skype','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_call'			=> __('Call Now','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_email'			=> __('Email Us','fcb'),
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			'fcb_whatsapp'		=> __('WhatsApp','floating-contact-buttons'),
+			'fcb_facebook'		=> __('Facebook','floating-contact-buttons'),
+			'fcb_viber'			=> __('Viber','floating-contact-buttons'),
+			'fcb_slack'			=> __('Slack','floating-contact-buttons'),
+			'fcb_twitter'		=> __('X (Twitter)','floating-contact-buttons'),
+			'fcb_telegram'		=> __('Telegram','floating-contact-buttons'),
+			'fcb_instagram'		=> __('Instagram','floating-contact-buttons'),
+			'fcb_skype'			=> __('Skype','floating-contact-buttons'),
+			'fcb_call'			=> __('Call Now','floating-contact-buttons'),
+			'fcb_email'			=> __('Email Us','floating-contact-buttons'),
 			'fcb_link'			=> $custom_link_name,
-			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-			'fcb_phone'			=> __('Callback Request','fcb')
+			'fcb_phone'			=> __('Callback Request','floating-contact-buttons')
 		);
 
 		return $select_social_media;
