@@ -95,7 +95,7 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 		function admin_init() {
 			//register settings sections
 			foreach ( $this->settings_sections as $section ) {
-				if ( false == get_option( $section['id'] ) ) {
+				if ( false === get_option( $section['id'] ) ) {
 					add_option( $section['id'] );
 				}
 
@@ -176,10 +176,9 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$type        = isset( $args['type'] ) ? $args['type'] : 'text';
 			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
 
-			$html        = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder );
+			$html        = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $size, esc_attr( $args['section'] ), esc_attr( $args['id'] ), $value, $placeholder );
 			$html       .= $this->get_field_description( $args );
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $html;
+			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**
@@ -201,11 +200,11 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			$size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$type        = isset( $args['type'] ) ? $args['type'] : 'number';
 			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
-			$min         = ( $args['min'] == '' ) ? '' : ' min="' . $args['min'] . '"';
-			$max         = ( $args['max'] == '' ) ? '' : ' max="' . $args['max'] . '"';
-			$step        = ( $args['step'] == '' ) ? '' : ' step="' . $args['step'] . '"';
+			$min         = ( '' === $args['min'] ) ? '' : ' min="' . esc_attr( $args['min'] ) . '"';
+			$max         = ( '' === $args['max'] ) ? '' : ' max="' . esc_attr( $args['max'] ) . '"';
+			$step        = ( '' === $args['step'] ) ? '' : ' step="' . esc_attr( $args['step'] ) . '"';
 
-			$html        = sprintf( '<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder, $min, $max, $step );
+			$html        = sprintf( '<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, esc_attr( $args['section'] ), esc_attr( $args['id'] ), $value, $placeholder, $min, $max, $step );
 			$html       .= $this->get_field_description( $args );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
@@ -286,10 +285,10 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-			$html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
+			$html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, esc_attr( $args['section'] ), esc_attr( $args['id'] ) );
 
 			foreach ( $args['options'] as $key => $label ) {
-				$html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
+				$html .= sprintf( '<option value="%s"%s>%s</option>', esc_attr( $key ), selected( $value, $key, false ), esc_html( $label ) );
 			}
 
 			$html .= sprintf( '</select>' );
@@ -364,10 +363,10 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 			$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-			$id    = $args['section']  . '[' . $args['id'] . ']';
+			$id    = esc_attr( $args['section'] ) . '[' . esc_attr( $args['id'] ) . ']';
 			$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File','floating-contact-buttons' );
-			$html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
-			$html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
+			$html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, esc_attr( $args['section'] ), esc_attr( $args['id'] ), $value );
+			$html  .= '<input type="button" class="button wpsa-browse" value="' . esc_attr( $label ) . '" />';
 			$html  .= $this->get_field_description( $args );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
@@ -446,7 +445,8 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 
 			// Verify this is coming from admin and is a proper POST request
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			if ( !is_admin() || !isset($_POST['action']) || $_POST['action'] !== 'update' ) {
+			$action = isset( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
+			if ( ! is_admin() || $action !== 'update' ) {
 					
 				wp_die( esc_html__( 'Invalid request.', 'floating-contact-buttons' ) );
 			}
@@ -526,7 +526,11 @@ if ( !class_exists( 'FCB_Admin_Settings' ) ):
 			}
 
 			foreach ( $this->settings_sections as $tab ) {
-				$html .= sprintf( '<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>', $tab['id'], $tab['title'] );
+				$html .= sprintf(
+					'<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>',
+					esc_attr( $tab['id'] ),
+					esc_html( $tab['title'] )
+				);
 			}
 
 			$html .= '</h2>';

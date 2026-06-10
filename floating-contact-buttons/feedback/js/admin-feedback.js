@@ -2,7 +2,7 @@
     $(document).ready(function(){
         let plugin_name = 'floating-contact-buttons';
 		let plugin_slug = 'fcb';
-        $target = $('#the-list').find('[data-slug="'+plugin_name+'"] span.deactivate a');
+        let $target = $('#the-list').find('[data-slug="'+plugin_name+'"] span.deactivate a');
 
         var plugin_deactivate_link = $target.attr('href');
 

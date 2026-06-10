@@ -3,8 +3,8 @@ Contributors:narinder-singh,satindersingh,coolplugins
 Tags: chat, click to call, Whatsapp, email, Instagram
 Requires at least:5.0
 Requires PHP: 7.2
-Tested up to:6.9
-Stable tag: 1.2.8
+Tested up to:7.0
+Stable tag: 1.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,9 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 
 == Changelog ==
 
+= Version 1.2.9 || 10 June 2026 =
+- **Improved** : Code Improvements & Optimization
+
 = Version 1.2.8 || 20 Feb 2026 =
 - **Fixed** : Standardized text domain across plugin.
 
@@ -149,5 +152,5 @@ Yes, you can display multiple buttons (e.g., WhatsApp, Email, and Call Now) toge
 
 == Upgrade Notice ==
 
-= Version 1.2.8 || 20 Feb 2026 =
-- **Fixed** : Standardized text domain across plugin.
+= Version 1.2.9 || 10 June 2026 =
+- **Improved** : Code Improvements & Optimization

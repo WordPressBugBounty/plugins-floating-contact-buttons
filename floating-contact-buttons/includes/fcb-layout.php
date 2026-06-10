@@ -23,18 +23,18 @@ class FCB_Layout
 
 		// Check user capability for email sending (allow non-logged-in users for contact form)
 		if (is_user_logged_in() && !current_user_can('read')) {
-			wp_send_json_error(array('message'=>'Unauthorized access'));
-			exit;
+			return wp_send_json_error(array('message'=>'Unauthorized access'));
+			
 		}
 
 		if(!isset($_POST['private_key'])){
-			wp_send_json_error(array('message'=>'nonce verification failed'));
-			exit;
+			return wp_send_json_error(array('message'=>'nonce verification failed'));
+			
 		}
 		
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['private_key'] ) ), 'fcb_email_responce_nonce' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'floating-contact-buttons' ) ) );
-			exit;
+			return wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'floating-contact-buttons' ) ) );
+			
 		}
 		
         $FCB_Settings = new FCB_Settings();
@@ -44,8 +44,8 @@ class FCB_Layout
 		
 		// Validate email addresses
 		if (!is_email($fcb_email_to) || !is_email($fcb_email_from)) {
-			wp_send_json_error(array('message'=>'Invalid email configuration'));
-			exit;
+			return wp_send_json_error(array('message'=>'Invalid email configuration'));
+			
 		}
 		
 		
@@ -54,10 +54,10 @@ class FCB_Layout
 
 		
 		if (!preg_match('/^\+?[0-9]{7,15}$/', $fcb_phn_num)) {
-			wp_send_json_error(array(
+			return wp_send_json_error(array(
 				'message' => 'Invalid phone number format. Please enter 7-15 digits with optional + prefix.'
 			));
-			exit;
+			
 		}
 
 		
@@ -65,7 +65,7 @@ class FCB_Layout
 				
 		$message = '<html><body>';
 		$message .= '<h3>A Callback request is received by Instant Support Buttons </h3>';
-		$message .= '<p><strong>Call</strong>: <a href="tel:'.'+'.esc_attr($fcb_phn_num).'">'.'+'.$fcb_phn_num.'</a></p>';
+		$message .= '<p><strong>Call</strong>: <a href="tel:'.esc_attr('+'.$fcb_phn_num).'">'.esc_html('+'.$fcb_phn_num).'</a></p>';
 		$message .= '</body></html>';
 
 		$subject = "[" . sanitize_text_field($site_url) . "] Callback Request By Instant Support Buttons";
@@ -75,8 +75,8 @@ class FCB_Layout
         $headers .= "From:<" . sanitize_email($fcb_email_from) . "> \r\n";
         $headers .= "Reply-To: " . sanitize_email($fcb_email_from) . "\r\n";
 		
-        $mail=wp_mail( $fcb_email_to, $subject, $message, $headers);
-		exit;
+        $mail = wp_mail( $fcb_email_to, $subject, $message, $headers );
+		$mail ? wp_send_json_success() : wp_send_json_error( array( 'message' => esc_html__( 'Email failed', 'floating-contact-buttons' ) ) );
 	}
 
 	function fcb_generate_html(){
@@ -127,7 +127,7 @@ class FCB_Layout
         $fcb_email_to =  sanitize_email($FCB_Settings->fcb_get_option('fcb_email_to', 'fcb_basic_settings'));       
         $fcb_email_from =  sanitize_email($FCB_Settings->fcb_get_option('fcb_email_from', 'fcb_basic_settings'));
 
-        $fcb_id_array= explode(',',$fcb_custom_page);
+        $fcb_id_array= array_map( 'trim', explode( ',', $fcb_custom_page ) );
 		$fcb_show_on=  isset( $fcb_show_list ) && $fcb_show_list!=""? $fcb_show_list : 'all';
         
         $social_media=array('fcb_whatsapp','fcb_facebook','fcb_viber','fcb_slack','fcb_twitter','fcb_telegram','fcb_instagram','fcb_skype','fcb_email','fcb_link','fcb_phone','fcb_call');
@@ -148,7 +148,8 @@ class FCB_Layout
 
 
 
-		$output=''; 
+		$output='';
+		$animation_css = '';
         $fcb_address=false;
         
         $output.='
@@ -173,19 +174,18 @@ class FCB_Layout
                                
 							}
 									 // Validate animation_count for CSS output
-									 $animation_count = absint($animation_count);
-									 $output.='<style>						 
-										@keyframes cf4FadeInOut {
+									 $animation_count = max( 1, absint( $animation_count ) );
+									 $animation_css = '@keyframes cf4FadeInOut {
 											0% {
 												opacity:1;
 											}
-											'. (1 / $animation_count) * 100 .'% {
+											' . ( ( 1 / $animation_count ) * 100 ) . '% {
 												opacity:1;
 											}
-											'. (3 / $animation_count) * 100 .'% {
+											' . ( ( 3 / $animation_count ) * 100 ) . '% {
 												opacity:0;
 											}
-											'. (100 - ((2 / $animation_count) * 100)) .'% {
+											' . ( 100 - ( ( 2 / $animation_count ) * 100 ) ) . '% {
 												opacity:0;
 											}
 											100% {
@@ -193,13 +193,11 @@ class FCB_Layout
 											}
 											}
 											.fcb-marque-icons .fcb-icon {
-												animation-duration: '.$animation_count.'s;
-												-o-animation-duration: '.$animation_count.'s;
-												-moz-animation-duration: '.$animation_count.'s;
-												-webkit-animation-duration: '.$animation_count.'s;
-											}
-
-										</style>';
+												animation-duration: ' . $animation_count . 's;
+												-o-animation-duration: ' . $animation_count . 's;
+												-moz-animation-duration: ' . $animation_count . 's;
+												-webkit-animation-duration: ' . $animation_count . 's;
+											}';
 
                             if(empty($total_media_url)){
                                 foreach ( $social_media as $key => $value) {
@@ -238,28 +236,30 @@ class FCB_Layout
                     if($value=='fcb_phone' && $fcb_email_to!='' &&  $fcb_email_from!=''){
                         $output.='<a id="fcb-phone" class="fcb-menus">
                         <span class="fcb-media-icon"><span class="fcb-icon icon-'.esc_attr($value).'"></span></span>
-                        <span class="fcb-media-name">' .wp_kses_post($media_name). '<span>
+                        <span class="fcb-media-name">' . esc_html( $media_name ) . '<span>
                         </a>';
                     }
 					else if($media_url!=''){
 						$fcb_address=true;
-                        $output.='<a href="'.esc_url($url_array[$value]).'" target="__blank" class="fcb-menus" id="'.esc_attr($key).'">
+                        $output.='<a href="'.$url_array[$value].'" target="__blank" class="fcb-menus" id="'.esc_attr($key).'">
+
+						
                             <span class="fcb-media-icon">';
-                                
+							
                             $output.='<span class="fcb-icon icon-'.esc_attr($value).'"></span>';
                                 
                             $output.='</span>
-                            <span class="fcb-media-name">' .wp_kses_post($media_name). '</span>
+                            <span class="fcb-media-name">' . esc_html( $media_name ) . '</span>
                         </a>';
 					}
 				}		
 			    if($fcb_address!=true){
 					$setting_panel=admin_url('options-general.php?page=instant_support_buttons');
 					if(is_user_logged_in()){								
-						$output.='<p class="fcb-config-plugin">'.__("Please configure at least one social media option in setting's page",'floating-contact-buttons').'. <a href="'.esc_url($setting_panel).'">'.__("Click Here",'floating-contact-buttons').'</a></p>';
+						$output.='<p class="fcb-config-plugin">'.esc_html__( "Please configure at least one social media option in setting's page", 'floating-contact-buttons' ).'. <a href="'.esc_url($setting_panel).'">'.esc_html__( "Click Here", 'floating-contact-buttons' ).'</a></p>';
 					}
 					else{
-						$output.='<p class="fcb-config-plugin">'.__("Social media options not selected",'floating-contact-buttons').'.</p>';
+						$output.='<p class="fcb-config-plugin">'.esc_html__( 'Social media options not selected', 'floating-contact-buttons' ).'.</p>';
 					}				
 				} 
 				
@@ -277,37 +277,37 @@ class FCB_Layout
 							<div class="fcb-loader-ring"></div>
 						</div>
 						<div class="fcb-callback-text">
-							<span class="fcb-callback-message">'.__('Please enter your phone number and we will call you back soon','floating-contact-buttons').'</span>
+							<span class="fcb-callback-message">'.esc_html__( 'Please enter your phone number and we will call you back soon', 'floating-contact-buttons' ).'</span>
 						</div>						
 						<div class="fcb-callback-form">
 							<form method="post">
 							<input name="phone_num" id="fcb-phn-num" class="fcb-message-callback" required="required" type="tel" data-mask="00-000-00-000-00" placeholder="+XX-XXX-XX-XXX-XX">
-							<input id="fcb-callback-submit" type="submit" value="'.__('Submit','floating-contact-buttons').'">
+							<input id="fcb-callback-submit" type="submit" value="'.esc_attr__( 'Submit', 'floating-contact-buttons' ).'">
 							</form>
 						</div>						
 					</div>				
 					<div id="fcb-success-msg">
-						<h2>'.__('Thank you','floating-contact-buttons').'</h2>
-						<p>'.__('We will call you back soon','floating-contact-buttons').'</p>
+						<h2>'.esc_html__( 'Thank you', 'floating-contact-buttons' ).'</h2>
+						<p>'.esc_html__( 'We will call you back soon', 'floating-contact-buttons' ).'</p>
 					</div>	
 					<div id="fcb-error-msg">
-						<span class="fcb-alert">'.__('Please enter valid phone number','floating-contact-buttons').'</span>
+						<span class="fcb-alert">'.esc_html__( 'Please enter valid phone number', 'floating-contact-buttons' ).'</span>
 					</div>	
 		        </div>';
 
 			}
 			// phpcs:enable WordPress.WP.I18n.TextDomainMismatch
         $output .= '</div>';
-        $output .= '<style type="text/css">'.$select_color.'</style>';
-		
 
-        if ($fcb_show_on=='all' || in_array($wp_query->post->ID,$fcb_id_array)){
+        $current_id = isset( $wp_query->post->ID ) ? (string) $wp_query->post->ID : '';
+        if ( 'all' === $fcb_show_on || in_array( $current_id, $fcb_id_array, true ) ) {
             wp_enqueue_style( 'fcb-css');
+            wp_add_inline_style( 'fcb-css', $select_color );
+            wp_add_inline_style( 'fcb-css', $animation_css );
             wp_enqueue_style( 'fcb-fontawesome');
             wp_enqueue_script( 'fcb-js');
             wp_enqueue_script( 'fcb-mask-js');
-           // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo  $output ;
+            echo  $output;
         }
 	}
 	

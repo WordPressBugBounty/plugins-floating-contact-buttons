@@ -138,8 +138,11 @@ class cp_feedback{
 
     function submit_deactivation_response(){
         if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), '_cool-plugins_deactivate_feedback_nonce' ) ) {
-            wp_send_json_error('Invalid nonce. Security check failed.');
+            return wp_send_json_error('Invalid nonce. Security check failed.');
         } else{
+            if ( ! current_user_can( 'activate_plugins' ) ) {
+                return wp_send_json_error( array( 'message' => 'Unauthorized' ), 403 );
+            }
             $reason = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
             $deactivate_reasons = [
                 'didnt_work_as_expected' => [
@@ -180,11 +183,12 @@ class cp_feedback{
             $install_date      = get_option('fcb-install-date') ? get_option('fcb-install-date'): 'N/A';
             $unique_key        = '59';
             $site_id            = $site_url . '-' . $install_date . '-' . $unique_key;
+            $info               = \Floating_Contact_Buttons::fcb_get_user_info();
 			$response = wp_remote_post( $this->feedback_url , [
                 'timeout' => 30,
                 'body' => [
-                    'server_info' => serialize(\Floating_Contact_Buttons::fcb_get_user_info()['server_info']),
-                    'extra_details' => serialize(\Floating_Contact_Buttons::fcb_get_user_info()['extra_details']),
+                    'server_info' => wp_json_encode( $info['server_info'] ),
+                    'extra_details' => wp_json_encode( $info['extra_details'] ),
                     'plugin_version' => $this->plugin_version,
                     'plugin_initial' => $plugin_initial,
                     'plugin_name' => $this->plugin_name,
@@ -197,7 +201,9 @@ class cp_feedback{
                 ],
 			] );
 			
-            die( json_encode( array('response'=>$response) ) );
+            wp_send_json_success( array( 'response' => true ) ); 
+            exit;
+
         }
 
     }

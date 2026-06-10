@@ -162,7 +162,8 @@ class FCB_Settings
                         'pc' => 'PC',
                         'mobile' => 'Mobile',
                         'tablet' => 'Tablet'
-                    )
+                    ),
+                    'sanitize_callback' => array( $this, 'fcb_sanitize_hide_call_now' ),
                 ),
 				array(
                     'name' => 'fcb_email',
@@ -217,7 +218,8 @@ class FCB_Settings
                     'options' => array(
                         'all' => 'ALL',
                         'custom' => 'Custom'
-                    )
+                    ),
+                    'sanitize_callback' => array( $this, 'fcb_sanitize_show_on' ),
                 ),
                 array(
                     'name' => 'fcb_custom_page',
@@ -258,6 +260,7 @@ class FCB_Settings
 			),
             
         );
+
 
         return $settings_fields;
     }
@@ -332,4 +335,37 @@ class FCB_Settings
 		
 		return $phone;
 	}
+
+	/**
+	 * Sanitize show-on radio value
+	 *
+	 * @param string $value Submitted radio value
+	 * @return string Allowed values only: all, custom
+	 */
+	function fcb_sanitize_show_on( $value ) {
+		return in_array( $value, array( 'all', 'custom' ), true ) ? $value : 'all';
+	}
+
+	/**
+	 * Sanitize hide call now multicheck values
+	 *
+	 * @param mixed $value Submitted multicheck values
+	 * @return array Allowed keys only: pc, mobile, tablet
+	 */
+	function fcb_sanitize_hide_call_now( $value ) {
+        if ( ! is_array( $value ) ) {
+            return array();
+        }
+    
+        $allowed   = array( 'pc', 'mobile', 'tablet' );
+        $sanitized = array();
+    
+        foreach ( $allowed as $key ) {
+            if ( isset( $value[ $key ] ) ) {
+                $sanitized[ $key ] = $key;
+            }
+        }
+    
+        return $sanitized;
+    }
 }

@@ -33,8 +33,12 @@ if (!class_exists('fcbFeedbackNotice')) {
         // ajax callback for review notice
         public function fcb_dismiss_review_notice() {
             if ( ! isset( $_POST['private'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['private'] ) ), 'fcb_review_notice_private' ) ) {
-                wp_send_json_error( array( 'message' => 'nonce verification failed' ) );
-                exit;
+                return wp_send_json_error( array( 'message' => 'nonce verification failed' ) );
+                
+            }
+
+            if ( ! current_user_can( 'manage_options' ) ) {
+                return wp_send_json_error( array( 'message' => 'Unauthorized' ), 403 );
             }
         
             update_option( 'fcb-alreadyRated', 'yes' );
@@ -73,55 +77,68 @@ if (!class_exists('fcbFeedbackNotice')) {
                 if (isset($diff_days) && $diff_days>=3) {
                     wp_enqueue_script( 'fcb-feedback-notice-script' );
                     wp_enqueue_style( 'fcb-feedback-notice-styles' );
-                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    echo $this->create_notice_content();
+                    echo $this->create_notice_content(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     }
         }  
 
         // generated review notice HTML
         function create_notice_content(){
             
-            $ajax_url=admin_url( 'admin-ajax.php' );
-            $ajax_callback='fcb_dismiss_notice';
-            $wrap_cls="notice notice-info is-dismissible";
-            $img_path=FCB_URL.'assets/images/fcb-logo.png';
-            $p_name="Instant Support Buttons";
-            $like_it_text='Rate Now! ★★★★★';
-            $already_rated_text=esc_html__( 'Already Reviewed', 'floating-contact-buttons' );
-            $not_like_it_text=esc_html__( 'No, not good enough, i do not like to rate it!', 'floating-contact-buttons' );
-            $not_interested=esc_html__( 'Not Interested', 'floating-contact-buttons' );
-            $p_link=esc_url('https://wordpress.org/support/plugin/floating-contact-buttons/reviews/#new-post');
-            $nonce=wp_create_nonce('fcb_review_notice_private');
-        
-            $message="Thanks for using <b>$p_name</b> - WordPress plugin. We hope you liked it ! <br/>Please give us a quick rating, it works as a boost for us to keep working on more <a href='https://coolplugins.net' target='_blank'><strong>Cool Plugins</strong></a>!<br/>";
-        
-            $html='<div data-nonce="%11$s" data-ajax-url="%8$s"  data-ajax-callback="%9$s" class="cool-feedback-notice-wrapper %1$s">
-            
-            <div class="message_container">%4$s
-            <div class="callto_action">
-            <ul>
-                <li class="love_it"><a href="%5$s" class="like_it_btn button button-primary" target="_new" title="%6$s">%6$s</a></li>
-                <li class="already_rated"><a href="javascript:void(0);" class="already_rated_btn button fcb_dismiss_notice" title="%7$s">%7$s</a></li>             
-                <li class="already_rated"><a href="javascript:void(0);" class="already_rated_btn button fcb_dismiss_notice" title="%10$s">%10$s</a></li>           
-            </ul>
-            <div class="clrfix"></div>
-            </div>
-            </div>
-            </div>';
+        $ajax_url      = admin_url( 'admin-ajax.php' );
+        $ajax_callback = 'fcb_dismiss_notice';
+        $wrap_cls      = 'notice notice-info is-dismissible';
+        $p_name        = 'Instant Support Buttons';
+        $like_it_text  = 'Rate Now! ★★★★★';
 
-            return sprintf($html,
-                    $wrap_cls,
-                    $img_path,
-                    $p_name,
-                    $message,
-                    $p_link,
-                    $like_it_text,
-                    $already_rated_text,
-                    $ajax_url,// 8
-                    $ajax_callback,//9        
-                    $not_interested,//10
-                    $nonce
-                    );
+        $already_rated_text = esc_html__( 'Already Reviewed', 'floating-contact-buttons' );
+        $not_like_it_text   = esc_html__( 'No, not good enough, i do not like to rate it!', 'floating-contact-buttons' );
+        $not_interested     = esc_html__( 'Not Interested', 'floating-contact-buttons' );
+
+        $p_link = esc_url(
+            'https://wordpress.org/support/plugin/floating-contact-buttons/reviews/#new-post'
+        );
+
+        $nonce = wp_create_nonce( 'fcb_review_notice_private' );
+
+        $message = sprintf(
+            'Thanks for using <b>%1$s</b> - WordPress plugin. We hope you liked it ! <br/>Please give us a quick rating, it works as a boost for us to keep working on more <a href="%2$s" target="_blank"><strong>Cool Plugins</strong></a>!<br/>',
+            esc_html( $p_name ),
+            esc_url( 'https://coolplugins.net' )
+        );
+
+        $html = '
+        <div data-nonce="%9$s" data-ajax-url="%6$s" data-ajax-callback="%7$s" class="cool-feedback-notice-wrapper %1$s">
+            <div class="message_container">
+                %2$s
+                <div class="callto_action">
+                    <ul>
+                        <li class="love_it">
+                            <a href="%3$s" class="like_it_btn button button-primary" target="_new" title="%4$s">%4$s</a>
+                        </li>
+                        <li class="already_rated">
+                            <a href="javascript:void(0);" class="already_rated_btn button fcb_dismiss_notice" title="%5$s">%5$s</a>
+                        </li>
+                        <li class="already_rated">
+                            <a href="javascript:void(0);" class="already_rated_btn button fcb_dismiss_notice" title="%8$s">%8$s</a>
+                        </li>
+                    </ul>
+                    <div class="clrfix"></div>
+                </div>
+            </div>
+        </div>';
+
+        return sprintf(
+            $html,
+            esc_attr( $wrap_cls ),       // %1$s
+            $message,                    // %2$s
+            esc_url( $p_link ),          // %3$s
+            esc_html( $like_it_text ),   // %4$s
+            $already_rated_text,         // %5$s
+            esc_url( $ajax_url ),        // %6$s
+            esc_attr( $ajax_callback ),  // %7$s
+            $not_interested,             // %8$s
+            esc_attr( $nonce )           // %9$s
+        );
             
         }
 
